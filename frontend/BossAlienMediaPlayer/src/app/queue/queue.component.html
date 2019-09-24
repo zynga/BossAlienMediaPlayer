@@ -1,0 +1,10 @@
+<div class="container-fluid p-0">
+    <span *ngIf="queueService.queue && queueService.queue.length > 0; else elseBlock">
+        <bamp-queue-item *ngFor="let queuedItem of queueService.queue" [QueuedItem]=queuedItem></bamp-queue-item>
+    </span>
+    <ng-template #elseBlock>
+        <div class="alert text-center my-3" role="alert">
+            Nothing queued...
+        </div>
+    </ng-template>
+</div>

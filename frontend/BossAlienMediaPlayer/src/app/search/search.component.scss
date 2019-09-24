@@ -1,0 +1,16 @@
+@import "../../variables.scss";
+
+.search-field-container {
+    top: $navbar-height + $now-playing-height;
+    
+}
+
+.search-bg{    
+    background:#181818;
+    height:$search-height;
+}
+
+.search-results{
+    padding:0;
+    padding-top:$search-height - 10px;
+}

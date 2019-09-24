@@ -1,0 +1,13 @@
+@import "../../variables.scss";
+
+.album-art {
+    width:90px;
+    height:90px;
+}
+
+.artist-list, .album-name, .additional-info {
+    font-size: 0.85rem;
+}
+.additional-info {
+    color: $secondary-text-color;
+}

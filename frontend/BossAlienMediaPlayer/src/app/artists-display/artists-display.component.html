@@ -1,0 +1,5 @@
+<span *ngFor="let artist of Artists; index as i; let last = last;">
+  <ng-container *ngIf="i<MaxArtists;">
+    <a [routerLink]="['/search/artist/' + artist.name]">{{artist.name}}</a><span *ngIf="last == false && i <MaxArtists-1">, </span>
+  </ng-container>
+</span>

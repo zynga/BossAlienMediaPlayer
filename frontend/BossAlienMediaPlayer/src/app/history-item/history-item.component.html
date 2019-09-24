@@ -1,0 +1,41 @@
+<div class="history-item-container">
+  <div class="row my-1">
+    <div class="col vert-center">
+      <bamp-song-display [Track]="HistoryItem.track"></bamp-song-display>
+    </div>
+    <div class="col-auto vert-center">
+      <div class="row">
+        <div class="col">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" [routerLink]="" (click)="spotifyService.openTrack(HistoryItem.track.uri)"><i class="fab fa-spotify"></i> Open in Spotify</a>
+            </div>
+        </div>
+        <div class="col">
+          <div class="row nmb-3">
+            <div class="col text-center">
+                <div class="votes-icon upvotes"><i class="fas fa-thumbs-up"></i></div>
+            </div>            
+          </div>
+          <div class="row vert-center">
+            <div class="col text-center">
+              {{HistoryItem.upvotes}}
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row nmb-3"> 
+            <div class="col text-center">
+              <div class="votes-icon downvotes"><i class="fas fa-thumbs-down"></i></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              {{HistoryItem.downvotes}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

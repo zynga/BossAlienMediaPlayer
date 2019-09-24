@@ -1,0 +1,19 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="inputAlias">Alias</label>
+    <input type="text" class="form-control" id="inputAlias" formControlName="alias">
+    <small class="form-text text-muted">This will appear next to queued tracks.</small>
+  </div>
+  <div *ngIf="alias.invalid && (alias.dirty || alias.touched)"
+    class="alert alert-danger">
+
+    <div *ngIf="alias.errors.required">
+      Name must have at least 1 character in it.
+    </div>
+    <div *ngIf="alias.errors.forbiddenCharacters">
+      Alias has forbidden characters in it.
+    </div>
+  </div>
+  <button class="btn btn-success" type="submit" [disabled]="!profileForm.valid">Save</button>
+  
+</form>

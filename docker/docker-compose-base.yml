@@ -1,0 +1,14 @@
+version: '3'
+services:
+  bamp:
+    image: bamp
+    build: .
+    environment: 
+      - PULSE_SERVER=127.0.0.1
+    volumes:
+      - "~/.config/pulse:/var/lib/mopidy/.config/pulse"
+      - "../mopidy_bamp:/var/lib/mopidy/mopidy_bamp"
+      - "../database:/var/lib/mopidy/database"
+      - "../media:/var/lib/mopidy/media"
+    ports:
+      - "6680:6680"

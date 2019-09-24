@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+ @import "../node_modules/bootstrap/scss/bootstrap.scss";
+ @import "../node_modules/bootstrap/scss/mixins";
+ @import "../node_modules/ngx-toastr/toastr.css";
+
+ @import "variables.scss";
+
+ @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,800');
+
+html
+{
+    height:100%;
+}
+body
+{
+    height: 100%;
+    background: $background-gradient-color-1;
+    background: -moz-linear-gradient(top, $background-gradient-color-1 0%, $background-gradient-color-2 100%);
+    background: -webkit-linear-gradient(top, $background-gradient-color-1 0%,$background-gradient-color-2 100%);
+    background: linear-gradient(to bottom, $background-gradient-color-1 0%,$background-gradient-color-2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$background-gradient-color-1, endColorstr=$background-gradient-color-2,GradientType=0 );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: $text-color;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: $text-color;
+    text-decoration: none;
+    &:hover{
+        color: $highlight-color;        
+        text-decoration: none;
+    }
+}
+
+.vert-center
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.btn-outline-secondary
+{
+    border-width: 2px;
+    border-color: $secondary-text-color;
+    color:$text-color;
+    &:hover:not(.disabled)
+    {
+        background-color: $secondary-text-color;
+        color: $text-color;
+    }
+    &:focus, &:not(:disabled):not(.disabled):active:focus
+    {
+        box-shadow: none;
+    }
+    &.disabled
+    {
+        color: $secondary-text-color;
+        border-color: $secondary-text-color;
+    }
+}

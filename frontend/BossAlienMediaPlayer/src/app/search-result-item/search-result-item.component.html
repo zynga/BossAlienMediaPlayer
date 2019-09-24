@@ -1,0 +1,20 @@
+<div class="search-item-container">
+  <div class="row my-2">
+    <div class="col vert-center">
+        <bamp-song-display [Track]="SearchResult.Track"></bamp-song-display>
+    </div>
+    <div class="col-auto vert-center pr-0 queue-blocked-reason">
+      {{noQueueReason}}
+    </div>
+    <div class="col-auto vert-center pr-4">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="" (click)="spotifyService.openTrack(SearchResult.Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify</a>
+      </div>
+      <button type="button" *ngIf="queueingAllowed; else disabledQueueButton" class="btn btn-outline-secondary mx-3" (click)="Select()"><i class="fas fa-plus"></i></button>
+      <ng-template #disabledQueueButton>
+        <div class="btn btn-outline-secondary disabled mx-3" placement="top" [ngbTooltip]="noQueueReason"><i class="fas fa-plus"></i></div>
+      </ng-template>
+    </div>
+  </div>
+</div>

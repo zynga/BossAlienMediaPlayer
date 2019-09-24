@@ -1,0 +1,53 @@
+<title>{{getTitle()}}</title>
+
+<nav class="navbar fixed-top navbar-expand-sm">   
+    <div class="container">
+ 
+      <a class="navbar-brand" [routerLink]="['queue']"> 
+        
+        <img class="logo" [src]="getIcon()">
+
+        <!-- <img *ngIf="isPlayingTitle('In The Air Tonight');" class="logo" src="assets/phil.png">
+        <img *ngIf="isPlayingTitle('Pugwash');" class="logo" src="assets/pugwash.png">
+
+        <ng-template #standardTrackBlock>
+          <img class=logo src="assets/bamplogo_small.png">
+        </ng-template>
+
+        <img class=logo src="assets/bamplogo_small.png"> -->
+
+        <span class="logo-1">BossAlien</span><span class="logo-2">MusicPlayer</span>
+      </a>
+
+
+      <span *ngIf="authService.isLoggedIn">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['queue']" [routerLinkActive]="['active']">Queue</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['search']" [routerLinkActive]="['active']">Request</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['history']" [routerLinkActive]="['active']">History</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" [routerLink]="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle"></i> {{authService.user.alias}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" [routerLink]="['profile/' + authService.user.user_id]">Change alias</a>
+                <a class="dropdown-item" [routerLink]="" (click)="logoutPressed()">Log out</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </span>
+  </div>
+</nav>

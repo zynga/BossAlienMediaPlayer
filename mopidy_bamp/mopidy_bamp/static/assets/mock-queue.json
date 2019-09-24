@@ -1,0 +1,59 @@
+[
+   {
+      "name": "Test Track",
+      "artists": [
+          {
+          "name": "Test Artist"
+          }
+      ],
+      "album": {
+          "name": "Test Album"
+      },
+      "images":
+      [
+          "http://placekitten.com/400/400",
+          "http://placekitten.com/400/400"
+      ],
+      "RequestedBy": "Test Username",
+      "Upvotes": 4,
+      "Downvotes": -2
+  },
+  {
+      "name": "Test Track",
+      "artists": [
+         {
+         "name": "Test Artist"
+         }
+      ],
+      "album": {
+         "name": "Test Album"
+      },
+      "images":
+      [
+         "http://placekitten.com/400/400",
+         "http://placekitten.com/400/400"
+      ],
+      "RequestedBy": "Test Username",
+      "Upvotes": 4,
+      "Downvotes": -2
+   },
+   {
+      "name": "Test Track",
+      "artists": [
+         {
+         "name": "Test Artist"
+         }
+      ],
+      "album": {
+         "name": "Test Album"
+      },
+      "images":
+      [
+         "http://placekitten.com/400/400",
+         "http://placekitten.com/400/400"
+      ],
+      "RequestedBy": "Test Username",
+      "Upvotes": 4,
+      "Downvotes": -2
+   }
+]

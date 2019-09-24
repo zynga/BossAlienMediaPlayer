@@ -1,0 +1,25 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col-4">
+      <img class=logo src="assets/logo512.png">
+      <form>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" name="id" [(ngModel)]="id" (ngModelChange)="loginError = false">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="Password" name="pass" [(ngModel)]="password" (ngModelChange)="loginError = false">
+          </div>
+          <div *ngIf="loginError" class="alert alert-danger" role="alert">
+            Invalid credentials.
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-dark btn-block" (click)="login(id, password)">Login</button>
+          </div>
+        </form>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+include .travis.yml
+include LICENSE
+include MANIFEST.in
+include README.rst
+include mopidy_bamp/ext.conf
+include tox.ini
+
+recursive-include tests *.py
+recursive-include mopidy_bamp/static/*

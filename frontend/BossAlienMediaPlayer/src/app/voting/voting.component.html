@@ -1,0 +1,47 @@
+<div class="row px-3" *ngIf="Metadata && authService.isLoggedIn" (mouseenter)="onEnterVotingComponent()" (mouseleave)="onLeaveVotingComponent()">
+    <div class="col-sm-auto pt-3">
+        <div class="row"> 
+            <div class="col text-center">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-menu">
+                    <div *ngIf="CanShowRemoveTrack">
+                        <a class="dropdown-item" [routerLink]="" (click)="trash()"><i class="fas fa-trash"></i> Remove track</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                    <a class="dropdown-item" [routerLink]="" (click)="spotifyService.openTrack(Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-auto pt-3 pl-0">
+        <div class="row">
+            <div class="col text-center">
+                <button *ngIf="!isMyTrack(); else disabledUpVoteButton" type="button" class="btn btn-outline-secondary" [ngClass]="{ 'user-upvoted': Metadata.userUpvotedTrack }" (click)="upVote()" ><i class="fas fa-thumbs-up"></i></button>
+                <ng-template #disabledUpVoteButton>
+                    <div class="btn btn-outline-secondary disabled"><i class="fas fa-thumbs-up"></i></div>
+                </ng-template>
+            </div>            
+        </div>
+        <div class="row vert-center">
+            <div class="col text-center">
+              {{Metadata.upvotes}}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-auto pt-3 pl-0">
+        <div class="row"> 
+            <div class="col text-center">
+                <button *ngIf="!isMyTrack(); else disabledDownVoteButton" type="button" class="btn btn-outline-secondary" [ngClass]="{ 'user-downvoted': Metadata.userDownvotedTrack }" (click)="downVote()"><i class="fas fa-thumbs-down"></i></button>
+            </div>
+            <ng-template #disabledDownVoteButton>
+                <div class="btn btn-outline-secondary disabled"><i class="fas fa-thumbs-down"></i></div>
+            </ng-template>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                {{Metadata.downvotes}}
+              </div>
+        </div>
+    </div>
+    
+  </div>

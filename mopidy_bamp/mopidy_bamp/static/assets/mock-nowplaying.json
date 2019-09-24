@@ -1,0 +1,22 @@
+{
+    "name": "Test Track",
+    "artists": [
+        {
+        "name": "Artist 1"
+        },
+        {
+        "name": "Artist 2"
+        }
+    ],
+    "album": {
+        "name": "Test Album"
+    },
+    "images":
+    [
+        "http://placekitten.com/400/400",
+        "http://placekitten.com/400/400"
+    ],
+    "RequestedBy": "Test Username",
+    "Upvotes": 4,
+    "Downvotes": -2
+}

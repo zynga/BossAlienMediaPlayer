@@ -1,0 +1,11 @@
+<span *ngIf="queueService.currentPlaybackState; else elseBlock1">
+    <h3 *ngIf="queueService.currentPlaybackState.playback_enabled; else elseBlock2" class="fas fa-play-circle"></h3>
+    <ng-template #elseBlock2>
+        <h3 class="fas fa-pause-circle"></h3>
+    </ng-template>  
+</span>
+<ng-template #elseBlock1>
+  <span>
+      <i class="fas fa-arrow-up"></i>
+  </span>
+</ng-template> 

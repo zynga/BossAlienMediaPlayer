@@ -1,0 +1,20 @@
+<div class="row song-display-container">
+  <div class="col-md-auto">
+      <img *ngIf="Track.album" class=album-art [src]="Track.images[1]">
+  </div>
+  <div class="col vert-center track-info p-0">
+    <div class="row">
+      <div class="col-md-12 vert-center track-name">{{Track.name}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 vert-center artist-list">
+        <span *ngIf="Track.album"><a [routerLink]="['/search/album/' + Track.album.name]">{{Track.album.name}}</a>
+         ―</span>
+        <bamp-artists-display [MaxArtists]=3 [Artists]="Track.artists"></bamp-artists-display> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 vert-center additional-info"><span class="track-length"><i class="far fa-clock"></i> {{Track.length | date: 'm:ss'}} </span><span *ngIf="Track.requestedBy"> – Requested by <span placement="top" [ngbTooltip]="Track.requestedBy.user_id">[{{Track.requestedBy.alias}}]</span></span></div>
+    </div>
+  </div>
+</div>

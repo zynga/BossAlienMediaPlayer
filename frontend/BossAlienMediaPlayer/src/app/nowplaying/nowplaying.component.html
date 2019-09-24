@@ -1,0 +1,104 @@
+<div class="now-playing-container fixed-top">
+  
+  <div class="container pt-3 pr-3 pb-2 pl-3 background-image">   
+
+    <div class="row song-details">     
+      
+      <!-- Art Background -->
+      <div class="background-image-blurred ">
+          <span class="helper"></span>
+
+          <!-- Valid Album -->
+          <ng-container *ngIf="queueService.currentTrack && queueService.currentTrack.album;">
+            <img [src]="queueService.currentTrack.images[1]">
+          </ng-container>
+
+          <!-- Downvoted -->
+          <ng-container *ngIf="queueService.currentTrack && queueService.currentTrack.is_downvote_sound">
+            <img src="assets/downvoted-background.jpeg">
+          </ng-container>
+
+      </div>
+      <div class="background-image-blurred "></div>
+
+      <!-- Valid Track Found -->
+      <ng-container *ngIf="queueService.currentTrack && !queueService.currentTrack.is_downvote_sound;">
+            
+          
+
+          <!-- Album Art -->
+          <div class="col-md-3">
+            <img class="album-art" [src]="queueService.currentTrack.images[1]">
+          </div>
+
+          <!-- Song Description -->
+          <div class="col-md-6 vert-center p-0">
+              <div class="row">
+                <h2 class="col-md-12 text-center p-0">    
+                    {{ queueService.currentTrack.name | truncate:['60', '...'] }}            
+                </h2>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-center p-0">
+                  <h5>
+                    <a [routerLink]="['/search/album/' + queueService.currentTrack.album.name]">{{ queueService.currentTrack.album.name | truncate:['30', '...'] }}</a>
+                    ― 
+                    <bamp-artists-display [MaxArtists]=1 [Artists]="queueService.currentTrack.artists"></bamp-artists-display>
+                  </h5>
+                </div>
+              </div>
+              <div class="row" *ngIf="queueService.currentTrack">
+                  <div class="col-md-12 text-center p-0">
+                    <span class="requested">
+                      Requested by <span placement="top" [ngbTooltip]="queueService.currentTrack.requestedBy.user_id">[{{queueService.currentTrack.requestedBy.alias}}]</span>
+                    </span>
+                  </div>
+              </div> 
+          </div>
+
+          <!-- Voting -->
+          <div class="col-md-3 vert-center">
+              <bamp-voting [Metadata]="queueService.currentQueuedItemMetadata" [Track]="queueService.currentTrack" class="float-right"></bamp-voting>
+          </div>
+
+      </ng-container>
+
+      <!-- Downvote SFX -->
+      <ng-container *ngIf="queueService.currentTrack && queueService.currentTrack.is_downvote_sound;">
+          <h1 class="col-md-12 text-center vert-center">   
+              Song Downvoted :(
+          </h1>
+      </ng-container>
+
+      <!-- No Track Playing -->
+      <ng-container *ngIf="!queueService.currentTrack;">
+         <h1 class="col-md-12 text-center vert-center">   
+                No Track Playing  
+         </h1>
+      </ng-container>
+
+    </div> 
+    
+    <div class="row song-progress">
+        <div class="col-md-12">    
+          <div class="row pt-2">
+              <div class="col-md-12">
+                <div class="progress" style="height: 3px;">    
+                  <div *ngIf="queueService.currentPlaybackState" class="progress-bar" role="progressbar" [ngStyle]="{'width': queueService.currentPlaybackState.progress_percent * 100 +'%'}"></div>
+                </div>
+              </div>
+          </div>
+
+
+          <div class="row pt-1">
+            <div class="col-md-12">
+                <span class="float-md-left track-time">{{getProgressTime()}}</span>
+                <a [routerLink]="" (click)="toggleTimeDisplayMode()"><span class="float-md-right track-time">{{getTotalTime()}}</span></a>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>

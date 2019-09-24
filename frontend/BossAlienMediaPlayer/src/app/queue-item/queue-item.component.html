@@ -1,0 +1,10 @@
+<div class="queue-item-container">
+  <div class="row my-1">
+    <div class="col vert-center">
+      <bamp-song-display [Track]="QueuedItem.track"></bamp-song-display>
+    </div>
+    <div class="col-auto vert-center">
+      <bamp-voting [Metadata]="QueuedItem.metadata" [Track]="QueuedItem.track"></bamp-voting>
+    </div>
+  </div>
+</div>

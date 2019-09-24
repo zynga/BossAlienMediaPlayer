@@ -1,0 +1,45 @@
+version: '3'
+services:
+  bamp:
+    image: bamp
+    container_name: bamp
+    build: .
+    sysctls:
+      net.ipv4.ip_local_port_range: 10000 65000
+    environment: 
+      - PULSE_SERVER=127.0.0.1
+    volumes:
+      - "~/.config/pulse:/var/lib/mopidy/.config/pulse"
+      - "../mopidy_bamp:/var/lib/mopidy/mopidy_bamp"
+      - "../database:/var/lib/mopidy/database"
+      - "../media:/var/lib/mopidy/media"
+    restart: on-failure
+    expose:
+      - "6680"
+    networks:
+      - bamp-network
+  
+  nginx: 
+    image: nginx:latest
+    container_name: production_nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ../letsencrypt/etc/:/etc/letsencrypt/
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - bamp-network
+    logging:
+      driver: none
+
+  certbot:
+    image: certbot-renew
+    build: ./certbot
+    container_name: certbot
+    volumes:
+      - ../letsencrypt/etc/:/etc/letsencrypt/
+      - ../letsencrypt/varlib/:/var/lib/letsencrypt
+
+networks:
+  bamp-network:

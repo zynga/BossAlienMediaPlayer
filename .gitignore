@@ -1,0 +1,7 @@
+/mopidy_bamp/.idea/*
+/mopidy_bamp/venv/*
+docker/docker-compose.yml
+docker/mopidy.conf.secrets
+docker/mopidy.conf
+docker/nginx.conf
+.idea

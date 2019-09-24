@@ -1,0 +1,35 @@
+@import "../../variables.scss";
+
+.btn
+{
+    width:44px;
+    height:44px;
+
+    -webkit-transition:none;
+    -moz-transition:none;
+    -o-transition:none;
+    transition:none;
+}
+
+.user-upvoted
+{
+    background-color: $upvote-color;
+    border-color: $upvote-color;
+    color: white;
+
+    &:hover
+    {
+        background-color: lighten($upvote-color, 5%);
+        color: white;
+    }
+}
+
+.user-downvoted
+{
+    background-color: $downvote-color;
+    border-color: $downvote-color;
+    &:hover
+    {
+        background-color: lighten($downvote-color, 10%);
+    }
+}

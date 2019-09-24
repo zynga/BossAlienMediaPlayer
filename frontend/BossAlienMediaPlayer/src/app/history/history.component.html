@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <span *ngIf="historyService.history && historyService.history.length > 0; else elseBlock">
+        <bamp-history-item *ngFor="let historyItem of historyService.history" [HistoryItem]=historyItem></bamp-history-item>
+    </span>
+  <ng-template #elseBlock>
+      <div class="alert text-center my-3" role="alert">
+          Nothing played yet...
+      </div>
+  </ng-template>
+</div>
