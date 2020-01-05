@@ -11,7 +11,7 @@ RUN set -ex \
         gnupg \
         gstreamer1.0-alsa \
         gstreamer1.0-plugins-bad \
-        python-crypto \
+        python3-crypto \
         sqlite3 \
         sudo \
         vim \
@@ -19,20 +19,21 @@ RUN set -ex \
         libldap2-dev \
         libsasl2-dev \
         libssl-dev \
-        python2.7-dev \
+        python3-dev \
         cron \
         net-tools \
         procps \
-        python-pykka=1.2.1-4 \
+        python-pykka \
  && curl -L https://apt.mopidy.com/mopidy.gpg | apt-key add - \
  && curl -L https://apt.mopidy.com/mopidy.list -o /etc/apt/sources.list.d/mopidy.list \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         mopidy \
+		mopidy-local \
         mopidy-spotify \
- && curl -L https://bootstrap.pypa.io/get-pip.py | python - \
- && pip install -U six \
- && pip install \
+ && apt-get install -y python3-pip \
+ && pip3 install -U six \
+ && pip3 install \
         cryptography \
         pyasn1 \
         pyopenssl \
