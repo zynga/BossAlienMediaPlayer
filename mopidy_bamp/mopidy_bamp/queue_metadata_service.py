@@ -6,7 +6,6 @@ import logging
 import time
 import uuid
 import tornado.web
-from sets import Set
 
 from .dtos import QueueItemDTO
 from .base_service import BaseService
@@ -21,8 +20,8 @@ class QueueItem:
         self.user_id = user_id
 
         # Set of user_ids for these, so they cannot have the same user present more than once
-        self.upvote_ids = Set()
-        self.downvote_ids = Set()
+        self.upvote_ids = set()
+        self.downvote_ids = set()
 
         self.epoch = time.time()
 

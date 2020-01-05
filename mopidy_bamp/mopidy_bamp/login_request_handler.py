@@ -33,7 +33,7 @@ class LoginRequestHandler(BaseRequestHandler):
             ldap_connection.simple_bind_s(who=ldap_dn, cred=password)
             user_id = ldap_connection.whoami_s().replace('u:CORP\\', '')
             logger.debug('User validated! ' + user_id)
-        except ldap.LDAPError, e:
+        except (ldap.LDAPError) as e:
             logger.debug('ldap error: ' + str(e))
             raise tornado.web.HTTPError(status_code=403, log_message='invalid creds')
 
