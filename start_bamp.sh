@@ -43,13 +43,13 @@ do
     mv $DIR/docker/mopidy.conf.tmp $DIR/docker/mopidy.conf
 done < $DIR/docker/mopidy.conf.secrets
 
-BUILD_HASH="$(tar -cf - $DIR 2> /dev/null | md5)"
+BUILD_HASH="$(tar -cf - $DIR 2> /dev/null | md5sum)"
 echo Build hash is $BUILD_HASH
 CMD="sed 's|BUILD_HASH|$BUILD_HASH|g' $DIR/docker/mopidy.conf > $DIR/docker/mopidy.conf.tmp"
 eval $CMD
 mv $DIR/docker/mopidy.conf.tmp $DIR/docker/mopidy.conf
 
 (cd $DIR && 
-	docker-compose -f $DIR/docker/docker-compose.yml up --build && \
+	DOCKER_HOST=tcp://localhost:2375 docker-compose -f $DIR/docker/docker-compose.yml up --build && \
 	cd -)
 
