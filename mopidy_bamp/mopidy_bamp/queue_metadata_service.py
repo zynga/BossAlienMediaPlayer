@@ -6,6 +6,7 @@ import logging
 import time
 import uuid
 import tornado.web
+import functools
 
 from .dtos import QueueItemDTO
 from .base_service import BaseService
@@ -310,7 +311,9 @@ class QueueMetadataService(BaseService):
             while len(remaining_tracks) > 0:
 
                 # 1)
-                remaining_tracks.sort(cmp=remaining_tracks_sort)
+                # TODO Python 3 no longer uses cmp functions, must convert
+                # remaining_tracks_sort to a key function
+                remaining_tracks.sort(key=functools.cmp_to_key(remaining_tracks_sort))
 
                 # 2)
                 selected_track = remaining_tracks[0]
