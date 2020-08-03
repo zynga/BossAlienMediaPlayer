@@ -22,4 +22,9 @@ class BaseRequestHandler(tornado.web.RequestHandler):
         self.set_header("build-hash", config['mopidy_bamp']['build_hash'])
 
     def get_current_user(self):
-        return self.get_secure_cookie(self.SECURE_COOKIE_USER_FIELD)
+        user = self.get_secure_cookie(self.SECURE_COOKIE_USER_FIELD)
+
+        if user is not None:
+            user = user.decode('utf-8')
+
+        return user

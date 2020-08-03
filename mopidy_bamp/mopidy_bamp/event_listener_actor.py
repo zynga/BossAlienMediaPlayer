@@ -4,7 +4,6 @@ import urllib
 import logging
 import pykka
 import requests
-import string
 
 from mopidy.core import CoreListener
 from .history_service import g_history
@@ -118,8 +117,8 @@ class EventListenerFrontend(pykka.ThreadingActor, CoreListener):
 
 
 def sanitise_for_slack(text):
-    text = string.replace(text, "&", "&amp;")
-    text = string.replace(text, "<", "&lt;")
-    text = string.replace(text, ">", "&gt;")
+    text = text.replace("&", "&amp;")
+    text = text.replace("<", "&lt;")
+    text = text.replace(">", "&gt;")
     return text
 

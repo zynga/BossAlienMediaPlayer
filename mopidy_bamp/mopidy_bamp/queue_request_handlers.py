@@ -46,7 +46,7 @@ class QueueRequestHandler(BaseRequestHandler):
         response['queueitems'] = g_queue_metadata.get_all_queue_item_dtos(tracks)
 
         if now_playing_track is not None:
-            response['queueitems'] = filter(lambda t: t.track_uri != now_playing_track.uri, response['queueitems'])
+            response['queueitems'] = list(filter(lambda t: t.track_uri != now_playing_track.uri, response['queueitems']))
 
         # Get the user deets from the db
         with DBConnection() as db_connection:
@@ -72,22 +72,27 @@ class QueueRequestHandler(BaseRequestHandler):
 
         # Before adding the track, check the queue to see if it already exists
         tracks = self.core.tracklist.get_tracks().get()
+        logger.debug(f"Tracks length is {len(tracks)}")
 
         # We expect the front-end to dis-allow queuing tracks which cannot be queued
         # This means we need to put an allowed to queue state in search
         # results, and everywhere else tracks can be queued.
-        in_mopidy_track_list = filter(lambda t: t.uri == track_uri, tracks)
+        in_mopidy_track_list = len(list(filter(lambda t: t.uri == track_uri, tracks))) > 0
+        logger.debug(f"In mopidy track list {in_mopidy_track_list}")
 
         if in_mopidy_track_list:
+            logger.info("Song is in mopidy track list")
             raise tornado.web.HTTPError(400)
 
         # Stop re-queuing recent items
         if not g_history.can_play_track(track_uri):
+            logger.info("Song has been played recently")
             raise tornado.web.HTTPError(400)
 
         tl_tracks = self.core.tracklist.add(uris=[track_uri]).get()
 
         if len(tl_tracks) <= 0:
+            logger.info("Internal error, tl_tracks is empty")
             raise tornado.web.HTTPError(400)
 
         # Get the latest list of tracks

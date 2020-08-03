@@ -98,7 +98,7 @@ class HistoryService(BaseService):
         try:
             dtos = []
 
-            for track_uri, history_item in self.__history.iteritems():
+            for track_uri, history_item in self.__history.items():
                 dtos.append(HistoryItemDTO(history_item))
 
             # Sort them into order based on the time they were added to the history
@@ -135,7 +135,7 @@ class HistoryService(BaseService):
 
             # Find the oldest item
             oldest_item = None
-            for track_uri, history_item in self.__history.iteritems():
+            for track_uri, history_item in self.__history.items():
                 if oldest_item is None or history_item.epoch < oldest_item.epoch:
                     oldest_item = history_item
 

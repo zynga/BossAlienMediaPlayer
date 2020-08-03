@@ -15,11 +15,7 @@ services:
     ports:
       - "6680:6680"
   openldap: 
-    image: osixia/openldap:1.3.0
-    environment:
-      - LDAP_ORGANISATION="Cirito"
-      - LDAP_DOMAIN="cirito.com"
-      - LDAP_ADMIN_PASSWORD="xwingxwing"
+    image: osixia/openldap:1.2.2
     ports:
       - "389:389"
       - "636:636"
@@ -28,9 +24,9 @@ services:
   ldap-admin:
     image: osixia/phpldapadmin:0.7.2
     environment:
-      - LDAP_SERVER=ldap://openldap:389
+      - PHPLDAPADMIN_LDAP_HOSTS=openldap
     ports:
-      - "8080:80"
+      - "44304:443"
     networks:
       - bamp-network
 networks:
