@@ -50,6 +50,6 @@ eval $CMD
 mv $DIR/docker/mopidy.conf.tmp $DIR/docker/mopidy.conf
 
 (cd $DIR && 
-	DOCKER_HOST=tcp://localhost:2375 docker-compose -f $DIR/docker/docker-compose.yml up --build && \
+	docker-compose -f $DIR/docker/docker-compose.yml up --build && \
 	cd -)
 
