@@ -6,7 +6,7 @@ import logging
 import time
 import uuid
 import tornado.web
-from sets import Set
+import functools
 
 from .dtos import QueueItemDTO
 from .base_service import BaseService
@@ -21,8 +21,8 @@ class QueueItem:
         self.user_id = user_id
 
         # Set of user_ids for these, so they cannot have the same user present more than once
-        self.upvote_ids = Set()
-        self.downvote_ids = Set()
+        self.upvote_ids = set()
+        self.downvote_ids = set()
 
         self.epoch = time.time()
 
@@ -311,7 +311,9 @@ class QueueMetadataService(BaseService):
             while len(remaining_tracks) > 0:
 
                 # 1)
-                remaining_tracks.sort(cmp=remaining_tracks_sort)
+                # TODO Python 3 no longer uses cmp functions, must convert
+                # remaining_tracks_sort to a key function
+                remaining_tracks.sort(key=functools.cmp_to_key(remaining_tracks_sort))
 
                 # 2)
                 selected_track = remaining_tracks[0]
@@ -340,7 +342,7 @@ class QueueMetadataService(BaseService):
 
         # Remove any entries in our metadata not in mopidy
         uris_to_remove = []
-        for uri, queue_item in self.__queue_dict.iteritems():
+        for uri, queue_item in self.__queue_dict.items():
             in_mopidy_track_list = filter(lambda t: t.uri == uri, mopidy_track_list)
 
             if not in_mopidy_track_list:

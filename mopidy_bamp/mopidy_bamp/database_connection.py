@@ -94,7 +94,7 @@ class UserTable(DBTable):
     def get_dict(self, user_id_list):
         quoted_user_id_list = ['"' + x + '"' for x in user_id_list]
         quoted_user_string = ', '.join(quoted_user_id_list)
-        replacement_string = ','.join('?' * len(user_id_list)) # number of question marks - one for each id
+        replacement_string = ','.join('?' * len(list(user_id_list))) # number of question marks - one for each id
 
         command = u'SELECT * FROM {0} WHERE {1} IN ({2})'.format(
             self.table_name,
@@ -105,7 +105,7 @@ class UserTable(DBTable):
         #logger.debug("command: " + command)
 
         cur = self.connection.cursor()
-        cur.execute(command, user_id_list)
+        cur.execute(command, tuple(user_id_list))
 
         user_dto_dict = {}
 
