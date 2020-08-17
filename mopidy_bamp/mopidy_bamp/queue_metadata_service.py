@@ -80,7 +80,7 @@ def get_num_tracks_since_user_last_played(history_dtos, user_id):
             return index
 
     # Nothing in the history, we return the max value an int can be!
-    return sys.maxint
+    return sys.maxsize
 
 
 # Threadsafe object for interacting with BAMPS queue metadata.
