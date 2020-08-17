@@ -141,7 +141,8 @@ class VoteRequestHandler(BaseRequestHandler):
                 raise tornado.web.HTTPError(400)
 
             should_skip = track_data_dto.downvotes >= num_downvotes_needed
-            if 'downvotes_difference_before_remove' in self.config['mopidy_bamp']:
+            
+            if self.config['mopidy_bamp']['downvotes_difference_before_remove'] != 0:
                 should_skip = track_data_dto.downvotes - track_data_dto.upvotes > self.config['mopidy_bamp']['downvotes_difference_before_remove']
 
             if should_skip:
