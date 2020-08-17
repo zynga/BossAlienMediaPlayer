@@ -35,7 +35,7 @@ class UpdateUserDetailsRequestHandler(BaseRequestHandler):
                                (0x206b), 0x206c, 0x206d, 0x206e, 0x206f, 0x202D, 0x2028,
                                0x2029, 0x202a, 0x202b, 0x202c, 0x202e, 0x202f}
         for x in annoying_whitespace:
-            new_alias = new_alias.replace(unichr(x), '')
+            new_alias = new_alias.replace(chr(x), '')
         new_alias = new_alias.strip()
 
         if new_alias == '':

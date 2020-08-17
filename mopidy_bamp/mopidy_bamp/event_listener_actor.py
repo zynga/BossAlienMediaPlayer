@@ -63,6 +63,10 @@ class EventListenerFrontend(pykka.ThreadingActor, CoreListener):
             logger.warning("Not posting to slack, web hook not set, remember to set it in your secrets file!")
             return
 
+        if queue_item.track_uri.startswith("file:///var/lib/mopidy/media/downvote_sounds"):
+            logger.debug("Downvote sound, will not post to Slack")
+            return
+
         track_name = tl_track.track.name
         artist_strings = []
         for artist in tl_track.track.artists:
