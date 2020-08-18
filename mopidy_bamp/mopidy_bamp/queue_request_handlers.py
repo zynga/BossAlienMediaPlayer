@@ -50,7 +50,7 @@ class QueueRequestHandler(BaseRequestHandler):
 
         # Get the user deets from the db
         with DBConnection() as db_connection:
-            user_id_list = map(lambda x: x.user_id, response['queueitems'])
+            user_id_list = list(map(lambda x: x.user_id, response['queueitems']))
             user_dto_dict = db_connection.user_table.get_dict(user_id_list)
             response['users'] = user_dto_dict
 
