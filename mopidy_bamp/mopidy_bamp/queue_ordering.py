@@ -14,7 +14,7 @@ def re_order_queue(core, mopidy_track_list, history_dtos):
 
     ordered_track_uris = g_queue_metadata.get_suggested_track_ordering(mopidy_track_list, history_dtos)
     logger.debug('Ordered tracks list ({1}): {0}'.format(ordered_track_uris, len(ordered_track_uris)))
-    logger.debug('Mopidy playlist ({1}): {0}'.format(map(lambda t: t.uri, mopidy_track_list), len(mopidy_track_list)))
+    logger.debug('Mopidy playlist ({1}): {0}'.format(list(map(lambda t: t.uri, mopidy_track_list)), len(mopidy_track_list)))
     logger.debug('Currently playing song index: {0}'.format(get_track_index(core, ordered_track_uris[0])))
 
     rear_index = len(mopidy_track_list) - 1

@@ -22,7 +22,7 @@ class HistoryRequestHandler(BaseRequestHandler):
         history_dtos = g_history.get_history_dtos()
         track_dtos = g_history.get_track_dtos(history_dtos)
 
-        user_id_list = map(lambda x: x.user_id, history_dtos)
+        user_id_list = list(map(lambda x: x.user_id, history_dtos))
 
         with DBConnection() as db_connection:
             user_dto_dict = db_connection.user_table.get_dict(user_id_list)
