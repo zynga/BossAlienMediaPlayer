@@ -1,7 +1,6 @@
 version: '3'
 services:
   bamp:
-    image: bamp
     build: .
     environment: 
       - PULSE_SERVER=127.0.0.1
@@ -12,3 +11,10 @@ services:
       - "../media:/var/lib/mopidy/media"
     ports:
       - "6680:6680"
+  icecast:
+    build: ./icecast
+    volumes:
+      - ./icecast/logs:/var/log/icecast2
+      - ./icecast/icecast.xml:/etc/icecast2/icecast.xml
+    ports:
+      - 8000:8000

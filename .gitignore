@@ -4,4 +4,6 @@ docker/docker-compose.yml
 docker/mopidy.conf.secrets
 docker/mopidy.conf
 docker/nginx.conf
+docker/icecast/icecast.xml
+docker/icecast/logs/*.log
 .idea

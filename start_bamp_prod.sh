@@ -42,7 +42,7 @@ echo "Updating nginx.conf"
 CMD="sed 's|SERVER_NAME|$SERVER_NAME|g' $DIR/docker/nginx-base.conf > $DIR/docker/nginx.conf"
 eval $CMD
 
-echo "Injecting secrets into mopidy.conf"
+echo "Injecting secrets into mopidy.conf and icecast.xml"
 
 if [ ! -f $DIR/docker/mopidy.conf.secrets ]; then
     echo "Cannot find mopidy.conf.secrets, please create this file with the secrets seen in mopidy.conf"
@@ -50,6 +50,7 @@ if [ ! -f $DIR/docker/mopidy.conf.secrets ]; then
 fi
 
 cp $DIR/docker/mopidy-base.conf $DIR/docker/mopidy.conf
+cp $DIR/docker/icecast/icecast-base.xml $DIR/docker/icecast/icecast.xml
 
 while read LINE
 do
@@ -58,6 +59,10 @@ do
     CMD="sed 's|$SECRET_NAME|$SECRET_VALUE|g' $DIR/docker/mopidy.conf > $DIR/docker/mopidy.conf.tmp"
     eval $CMD
     mv $DIR/docker/mopidy.conf.tmp $DIR/docker/mopidy.conf
+
+	CMD="sed 's|$SECRET_NAME|$SECRET_VALUE|g' $DIR/docker/icecast/icecast.xml > $DIR/docker/icecast/icecast.xml.tmp"
+    eval $CMD
+    mv $DIR/docker/icecast/icecast.xml.tmp $DIR/docker/icecast/icecast.xml
 done < $DIR/docker/mopidy.conf.secrets
 
 BUILD_HASH="$(tar -cf - $DIR 2> /dev/null | md5)"
