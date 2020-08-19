@@ -1,0 +1,56 @@
+<icecast>
+    <limits>
+        <clients>100</clients>
+        <sources>2</sources>
+        <threadpool>5</threadpool>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>65535</burst-size>
+    </limits>
+
+    <authentication>
+        <source-password>ICECAST_SOURCE_PASSWORD</source-password>
+        <relay-password>ICECAST_RELAY_PASSWORD</relay-password>
+        <admin-user>ICECAST_ADMIN_USER</admin-user>
+        <admin-password>ICECAST_ADMIN_PASSWORD</admin-password>
+    </authentication>
+
+    <hostname>localhost</hostname>
+    <location>BAMP HQ</location>
+    <listen-socket>
+        <port>8000</port>
+    </listen-socket>
+
+    <fileserve>1</fileserve>
+
+    <mount type="normal">
+        <mount-name>/bamp</mount-name>
+        <fallback-mount>/silence.mp3</fallback-mount>
+        <fallback-override>1</fallback-override>
+        <stream-name>BAMP</stream-name>
+        <stream-description>BAMP</stream-description>
+    </mount>
+
+    <paths>
+        <basedir>./</basedir>
+
+        <logdir>/var/log/icecast2</logdir>
+        <webroot>/usr/share/icecast2/web</webroot>
+        <adminroot>./admin</adminroot>
+        <alias source="/" dest="/status.xsl"/>
+    </paths>
+
+    <logging>
+        <accesslog>access.log</accesslog>
+        <errorlog>error.log</errorlog>
+        <loglevel>4</loglevel> <!-- 4 Debug, 3 Info, 2 Warn, 1 Error -->
+        <logsize>10000</logsize> <!-- Max size of a logfile -->
+    </logging>
+
+    <security>
+        <chroot>0</chroot>
+    </security>
+</icecast>
