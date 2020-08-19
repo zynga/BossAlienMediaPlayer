@@ -16,8 +16,6 @@ services:
     restart: on-failure
     expose:
       - "6680"
-    networks:
-      - bamp-network
   
   nginx: 
     image: nginx:latest
@@ -28,8 +26,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    networks:
-      - bamp-network
     logging:
       driver: none
 
@@ -41,5 +37,10 @@ services:
       - ../letsencrypt/etc/:/etc/letsencrypt/
       - ../letsencrypt/varlib/:/var/lib/letsencrypt
 
-networks:
-  bamp-network:
+  icecast:
+    build: ./icecast
+    volumes:
+      - ./icecast/logs:/var/log/icecast2
+      - ./icecast/icecast.xml:/etc/icecast2/icecast.xml
+    ports:
+      - 8000:8000
