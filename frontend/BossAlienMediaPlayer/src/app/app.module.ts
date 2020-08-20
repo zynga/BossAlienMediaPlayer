@@ -80,7 +80,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule
