@@ -342,8 +342,9 @@ class QueueMetadataService(BaseService):
 
         # Remove any entries in our metadata not in mopidy
         uris_to_remove = []
-        for uri, queue_item in self.__queue_dict.iteritems():
-            in_mopidy_track_list = filter(lambda t: t.uri == uri, mopidy_track_list)
+        for uri, queue_item in self.__queue_dict.items():
+
+            in_mopidy_track_list = list(filter(lambda t: t.uri == uri, mopidy_track_list))
 
             if not in_mopidy_track_list:
                 uris_to_remove.append(uri)

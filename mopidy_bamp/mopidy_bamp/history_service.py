@@ -8,7 +8,7 @@ import tornado.web
 from .base_service import BaseService
 from .dtos import TrackDTO, HistoryItemDTO
 from .images import update_trackdto_images
-logger = logging.getLogger("mopidy_bamp")
+logger = logging.getLogger(__package__)
 
 
 class HistoryItem:
