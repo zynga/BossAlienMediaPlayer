@@ -23,6 +23,7 @@ running this command: \
 * We do not check in sensitive information into our repo (e.g. passwords, API secret keys, etc.),
 so secrets are written to the file `docker/mopidy.conf.secrets`. Each line contains a secret,
 each line has two columns, a secret name, and a secret value, separated by a space. Copy `docker/mopidy.conf.secrets.example` to `docker/modipy.conf.secrets` to have a starting point for this file.
+* In the secrets example you can see a few values that need random strings to work. Use a page like random.org to generate these strings.
 * `docker/modipy.conf.secrets` has been gitignored, you should keep out these values out of the version control.
 * `docker/mopidy.conf` has been gitignored too, do not check in this file.
 * Spotify client ID and secret can be obtained from https://www.mopidy.com/authenticate/#spotify

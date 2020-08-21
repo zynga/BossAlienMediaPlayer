@@ -100,15 +100,35 @@ Environment variables for development and production can be found within 'enviro
 
 Stylisation changes can be made via SASS files. The root folder contains styles.scss and variables.scss, which are global.  
 
+## Setting up development environment
+
+In short (using Debian over WSL):
+
+```
+$ cd frontend/BossAlienMediaPlayer
+$ curl -sL https://deb.nodesource.com/setup_14.x | sudo bash - # Use Node 14, assume nodejs is not installed yet
+$ sudo apt-get install -y nodejs
+$ rm -Rf node_modules/ # just in case you had to uninstall nodejs before
+$ npm i
+```
+
+Whenever a security alert appears, we must update the dependencies:
+
+```
+$ sudo npm install -g npm-check-updates # See notes below
+$ ncu # inspect which packages need updating
+$ ncu -u # apply the updates in package.json
+$ npm install # install the updates
+```
+
+Sometimes when installing an npm packge you get an error `npm ERR! enoent This is related to npm not being able to find a file.`, running the command again installs the package succesfully.
+
 ## Compiling the frontend
 
-Requirements
--node.js
+Set up the development environment as instructed above. Launch the backend (see Deploying BAMP). Go into the `frontend/BossAlienMediaPlayer` directory. Run:
 
-After launching the backend as instructed above, from the BossAlienMediaPlayer folder, first run 'npm install' to install node packages. Following this run:
-
-npm run build:dev
+```npm run build:dev```
 or
-npm run build:prod
+```npm run build:prod```
 
 This will compile the frontend, and poll for further changes (in dev mode), compiling when required.
