@@ -40,6 +40,7 @@ with real data. Check out the Secret Handling section below to see how to handle
 * Production: Run `start_bamp_prod.sh`. The script will use your computer IP, but if there is more than one, it will return and tell you to pass the IP you want as a command line argument. We suggest you use the first one it appears. Check in this script that `SERVER_NAME` is set to the correct domain the production server will have. This version runs on `https://yourdomain`, and should be accessible there. You need to set up ssl certificates.
 * Read Backing up data section to know what to back up regularly
 * Read SSL Certificates to know where the certificates come from
+* A stream will be available at `http://yourdomain:8000/bamp`. Type in this url to a browser or a media player to begin streaming.
 
 ## Backing up data
 
