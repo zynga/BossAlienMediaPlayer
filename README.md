@@ -10,7 +10,7 @@ BAMP has only been tested on MacOS, but there is no reason to think that it wonâ
 
 BAMP is an easy to run solution to play music in a shared space, that allows its members to suggest their own music with rules that allow fair distribution of songs for everyone.
 
-BAMP assumes that you have a server to which you can plug in speakers, how you set up your speakers is outside the scope of the project. BAMP runs on Docker, so the only dependency with the host machine is Docker and Pulseaudio.
+BAMP assumes that you have a server to which you can plug in speakers, how you set up your speakers is outside the scope of the project. It also streams to an Icecast server, which you can use to listen to BAMP at your place. BAMP runs on Docker, so the only dependency with the host machine is Docker and Pulseaudio.
 
 ## Install
 
