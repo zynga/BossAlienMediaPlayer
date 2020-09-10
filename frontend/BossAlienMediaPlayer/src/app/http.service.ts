@@ -43,6 +43,10 @@ export class HttpService {
       err => 
       {
         this.requestInFlight = false;
+        if (err.status == 404) // This prevents the pesky error from /api/queue when not logged in
+        {
+          return;
+        }
         this.connected = false;
         timer(retryDelay).subscribe(() => {
           this.lastRequestTime = Date.now();
