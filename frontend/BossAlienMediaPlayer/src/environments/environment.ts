@@ -9,7 +9,8 @@ export const environment = {
   historyPollTime : 10000,
   queueUpdatePauseDuration: 2000,
   searchDebounceTime: 600,
-  maxRequestRetryDelayTime: 5000
+  maxRequestRetryDelayTime: 5000,
+  icecastListenersPollTime : 2000,
 };
 
 /*

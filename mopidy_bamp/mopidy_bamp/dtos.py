@@ -81,6 +81,11 @@ class HistoryItemDTO:
 
         self.epoch = history_item.epoch
 
+# Data about a requested config value
+class ConfigValueDTO:
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
 
 # List of actions available per track
 class TrackActions:
@@ -128,6 +133,8 @@ class DTOEncoder(JSONEncoder):
         if isinstance(z, HistoryItemDTO):
             return z.__dict__
         if isinstance(z, AvailableTrackActionsDTO):
+            return z.__dict__
+        if isinstance(z, ConfigValueDTO):
             return z.__dict__
         else:
             return JSONEncoder.default(self, z)
