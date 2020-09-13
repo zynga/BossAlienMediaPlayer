@@ -16,6 +16,7 @@ from .playback_service import PlaybackService, g_playback
 from .queue_metadata_service import QueueMetadataService, g_queue_metadata
 from .history_service import g_history
 from .history_request_handlers import HistoryRequestHandler
+from .config_request_handler import ConfigRequestHandler
 from .user_request_handlers import UpdateUserDetailsRequestHandler, GetUserDetailsRequestHandler
 from .database_connection import DBConnection
 
@@ -50,6 +51,7 @@ def bamp_factory(config, core):
         (r'/api/history', HistoryRequestHandler, handler_args),
         (r'/api/updateuser', UpdateUserDetailsRequestHandler, handler_args),
         (r'/api/getuser', GetUserDetailsRequestHandler, handler_args),
+        (r'/api/config/([^/]+)', ConfigRequestHandler, handler_args),
 
         (r'/(.*)', tornado.web.StaticFileHandler, {'path': os.path.join(os.path.dirname(__file__), 'static')}),
     ]
@@ -84,6 +86,7 @@ class BAMPExtension(ext.Extension):
         schema['max_alias_length'] = config.Integer(minimum=1)
         schema['slack_web_hook'] = config.String(optional=False)
         schema['build_hash'] = config.String(optional=False)
+        schema['icecast_url'] = config.String(optional=True)
 
         return schema
 

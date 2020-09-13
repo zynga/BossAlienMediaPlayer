@@ -23,6 +23,9 @@
     <listen-socket>
         <port>8000</port>
     </listen-socket>
+    <http-headers>
+        <header name="Access-Control-Allow-Origin" value="*" />
+    </http-headers>
 
     <fileserve>1</fileserve>
 

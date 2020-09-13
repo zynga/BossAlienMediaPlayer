@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { QueueService } from '../queue.service';
+import { IcecastService } from '../icecast.service';
 
 @Component({
   selector: 'bamp-nav-bar',
@@ -10,7 +11,7 @@ import { QueueService } from '../queue.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(public authService: AuthService, private router: Router, protected queueService : QueueService) { }
+  constructor(public authService: AuthService, private router: Router, protected queueService : QueueService, private icecastService : IcecastService) { }
 
   ngOnInit() {
     this.authService.getIsLoggedIn();
@@ -57,4 +58,11 @@ export class NavBarComponent implements OnInit {
     return "BAMP";
   }
   
+  getCurrentIcecastListeners() : string {
+    if (this.icecastService.currentListeners < 0) {
+      return "...";
+    } else {
+      return "" + this.icecastService.currentListeners;
+    }
+  }
 }
