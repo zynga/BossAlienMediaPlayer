@@ -5,5 +5,6 @@ export const environment = {
   historyPollTime : 60000,
   queueUpdatePauseDuration: 2000,
   searchDebounceTime: 600,
-  maxRequestRetryDelayTime: 15000
+  maxRequestRetryDelayTime: 15000,
+  icecastListenersPollTime : 60000,
 };

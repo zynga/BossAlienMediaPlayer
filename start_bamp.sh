@@ -1,5 +1,13 @@
 #!/bin/bash
 
+inject_value() { # $1 $LINE, $2 FILENAME
+	local SECRET_NAME="$( echo $1 | cut -f1 -d' ' )"
+    local SECRET_VALUE="$( echo $1 | cut -f2 -d' ' )"
+    local CMD="sed 's|$SECRET_NAME|$SECRET_VALUE|g' $2 > $2.tmp"
+    eval $CMD
+    mv $2.tmp $2
+}
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # if arg provided use as ip address
@@ -37,22 +45,15 @@ cp $DIR/docker/icecast/icecast-base.xml $DIR/docker/icecast/icecast.xml
 
 while read LINE
 do
-    SECRET_NAME="$( echo $LINE | cut -f1 -d' ' )"
-    SECRET_VALUE="$( echo $LINE | cut -f2 -d' ' )"
-    CMD="sed 's|$SECRET_NAME|$SECRET_VALUE|g' $DIR/docker/mopidy.conf > $DIR/docker/mopidy.conf.tmp"
-    eval $CMD
-    mv $DIR/docker/mopidy.conf.tmp $DIR/docker/mopidy.conf
-
-	CMD="sed 's|$SECRET_NAME|$SECRET_VALUE|g' $DIR/docker/icecast/icecast.xml > $DIR/docker/icecast/icecast.xml.tmp"
-    eval $CMD
-    mv $DIR/docker/icecast/icecast.xml.tmp $DIR/docker/icecast/icecast.xml
+	inject_value "$LINE" "$DIR/docker/mopidy.conf"
+	inject_value "$LINE" "$DIR/docker/icecast/icecast.xml"
 done < $DIR/docker/mopidy.conf.secrets
+
+inject_value "ICECAST_URL http://$MY_IP:8000" $DIR/docker/mopidy.conf
 
 BUILD_HASH="$(tar -cf - $DIR 2> /dev/null | md5sum)"
 echo Build hash is $BUILD_HASH
-CMD="sed 's|BUILD_HASH|$BUILD_HASH|g' $DIR/docker/mopidy.conf > $DIR/docker/mopidy.conf.tmp"
-eval $CMD
-mv $DIR/docker/mopidy.conf.tmp $DIR/docker/mopidy.conf
+inject_value "BUILD_HASH $BUILD_HASH" $DIR/docker/mopidy.conf
 
 (cd $DIR && \
 	docker-compose -f $DIR/docker/docker-compose.yml up --build && \
