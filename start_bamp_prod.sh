@@ -66,7 +66,7 @@ do
 	inject_value "$LINE" "$DIR/docker/icecast/icecast.xml"
 done < $DIR/docker/mopidy.conf.secrets
 
-inject_value "ICECAST_URL https://SERVER_NAME/icecast" $DIR/docker/mopidy.conf
+inject_value "ICECAST_URL https://$SERVER_NAME/icecast" $DIR/docker/mopidy.conf
 
 BUILD_HASH="$(tar -cf - $DIR 2> /dev/null | md5)"
 echo Build hash is $BUILD_HASH
