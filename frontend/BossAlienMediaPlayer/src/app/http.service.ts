@@ -26,13 +26,11 @@ export class HttpService {
     this.lastRequestTime = Date.now();
     this.retryDelay = retryDelay;
     let http$ = this.http.get<T>(url, {observe: "response"});
-    http$.pipe(
-      tap(response => this.versionChecker.reloadIfServerBuildHashChanged(response))
-    );
-
+    
     http$.subscribe(
       res => 
       {
+        this.versionChecker.reloadIfServerBuildHashChanged(res);
         this.requestInFlight = false;
         this.connected = true;
         if (onSuccess)
@@ -43,6 +41,10 @@ export class HttpService {
       err => 
       {
         this.requestInFlight = false;
+        if (err.status == 404) // This prevents the pesky error from /api/queue when not logged in
+        {
+          return;
+        }
         this.connected = false;
         timer(retryDelay).subscribe(() => {
           this.lastRequestTime = Date.now();
