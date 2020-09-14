@@ -46,7 +46,7 @@ export class QueueService {
   }
 
   updateQueue(): void {
-    if (this.authService.isLoggedIn == false )
+    if (this.authService.isLoggedIn === undefined || this.authService.isLoggedIn == false)
     {
       return;
     }
