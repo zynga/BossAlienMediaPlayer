@@ -5,11 +5,14 @@
         <div class="input-group py-3">
           <input type="search" class="form-control" placeholder="find some music" #searchBox id="search-box" name="currentSearchTerm" (input)="search()" [(ngModel)]="currentSearchTerm">
           <div class="input-group-append">
-              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{typeMap[currentSearchType]}}</button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" *ngFor="let type of searchTypes" [routerLink]="" (click)="onSearchTypeSelected(type)">{{typeMap[type]}}</a>
-              </div>
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{typeMap[currentSearchType]}}</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" *ngFor="let type of searchTypes" [routerLink]="" (click)="onSearchTypeSelected(type)">{{typeMap[type]}}</a>
             </div>
+          </div>
+          <div class="queue-length">
+            &nbsp;<i class="fas fa-clock"></i> &nbsp; <span>{{getQueueLengthMilliseconds() | date: 'm:ss'}}</span>
+          </div>
         </div>
       </form>
     </div>
