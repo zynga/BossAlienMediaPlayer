@@ -26,13 +26,11 @@ export class HttpService {
     this.lastRequestTime = Date.now();
     this.retryDelay = retryDelay;
     let http$ = this.http.get<T>(url, {observe: "response"});
-    http$.pipe(
-      tap(response => this.versionChecker.reloadIfServerBuildHashChanged(response))
-    );
-
+    
     http$.subscribe(
       res => 
       {
+        this.versionChecker.reloadIfServerBuildHashChanged(res);
         this.requestInFlight = false;
         this.connected = true;
         if (onSuccess)
