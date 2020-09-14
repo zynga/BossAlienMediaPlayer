@@ -32,6 +32,8 @@ export class QueueService {
   
   public queue: QueuedItem[];
 
+  public queueLengthMilliseconds : number;
+
   constructor(
     private http: HttpClient,
     private authService:AuthService,
@@ -77,13 +79,15 @@ export class QueueService {
       }
       
       let queuedItems : QueuedItem[] = [];
-      
+      var queueLengthMilliseconds : number = 0;
+
       for(let i in tracks){
         let queuedItem = new QueuedItem();
         
         let track : Track = tracks[i];
         let metadata : QueuedItemMetadata = response.body.queueitems[i];
         
+        queueLengthMilliseconds += track.length.valueOf();
         queuedItem.track = track;
         queuedItem.track.requestedBy = response.body.users[metadata.user_id];
         queuedItem.metadata = metadata;
@@ -104,6 +108,7 @@ export class QueueService {
       }
       if (queueChanged || this.queue == undefined)
       {
+        this.queueLengthMilliseconds = queueLengthMilliseconds;
         this.queue = queuedItems;
       }
     });

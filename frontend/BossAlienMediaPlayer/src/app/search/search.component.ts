@@ -99,12 +99,16 @@ export class SearchComponent implements OnInit {
     this.search();
   }
 
-    setCurrentSearchType(type: string): void
+  setCurrentSearchType(type: string): void
+  {
+    this.currentSearchType = (type ? type : this.searchTypes[0]);
+    if (this.searchTypes.includes(this.currentSearchType) == false)
     {
-      this.currentSearchType = (type ? type : this.searchTypes[0]);
-      if (this.searchTypes.includes(this.currentSearchType) == false)
-      {
-        this.currentSearchType = this.searchTypes[0];
-      }
+      this.currentSearchType = this.searchTypes[0];
     }
+  }
+
+  getQueueLengthMilliseconds() : number {
+    return this.queueService.queueLengthMilliseconds;
+  }
 }
