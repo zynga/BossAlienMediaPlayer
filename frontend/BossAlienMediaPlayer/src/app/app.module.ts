@@ -27,6 +27,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HistoryItemComponent } from './history-item/history-item.component';
 import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 import { Pipe, PipeTransform } from '@angular/core';
+import { TrackLengthPipe } from "./tracklength.pipe";
 import { SomethingWentWrongComponent } from './something-went-wrong/something-went-wrong.component';
 import { DisconnectedFromServerGuard } from './disconnected-from-server.guard';
 
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
     HistoryItemComponent,
     ProfileEditorComponent,
     TruncatePipe,
+    TrackLengthPipe,
     SomethingWentWrongComponent
   ],
   imports: [
