@@ -116,7 +116,8 @@ class HttpServer(threading.Thread):
             self._get_request_handlers(),
             cookie_secret=self._get_cookie_secret(),
         )
-        self.server = tornado.httpserver.HTTPServer(self.app)
+        logger.debug(f"Xheaders enabled: {self.config['mopidy_bamp']['xheaders_enabled']}")
+        self.server = tornado.httpserver.HTTPServer(self.app, xheaders=self.config['mopidy_bamp']['xheaders_enabled'])
         self.server.add_sockets(self.sockets)
 
         self.io_loop = tornado.ioloop.IOLoop.current()

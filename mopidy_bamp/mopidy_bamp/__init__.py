@@ -74,6 +74,7 @@ class BAMPExtension(ext.Extension):
         schema['zeroconf'] = config.String(optional=True)
         schema['allowed_origins'] = config.List(optional=True)
         schema['csrf_protection'] = config.Boolean(optional=True)
+        schema['xheaders_enabled'] = config.Boolean(optional=False)
         schema['cookie_secret'] = config.Secret()
         schema['ldap_uri'] = config.Secret()
         schema['ldap_schema'] = config.Secret()
