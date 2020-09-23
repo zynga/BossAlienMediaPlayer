@@ -23,30 +23,20 @@ export class NowplayingComponent implements OnInit {
     }
   }
 
-  secondsToMS(d) : string {
-    d = Number(d);
-
-    var h = Math.floor(d / 3600);
-    var m = Math.floor(d % 3600 / 60);
-    var s = Math.floor(d % 3600 % 60);
-
-    return ('' + m).slice(-2) + ":" + ('0' + s).slice(-2);
-  }
-
-  getProgressTime() : string{
+  getProgressTime() : number {
     let secs = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.progress_seconds : 0;
-    return this.secondsToMS(secs); 
+    return secs; 
   }
 
-  getTotalTime() : string{
+  getTotalTime() : number {
     let progress = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.progress_seconds : 0;
     let duration = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.track_length_seconds : 0
     switch (this.timeDisplayMode)
     {
-      case showSongDuration:
-        return "-" + this.secondsToMS(duration - progress);
       case showRemainingTime:
-        return this.secondsToMS(duration);
+        return -(duration - progress)*1000;
+      case showSongDuration:
+        return duration*1000;
     }
   }
 
@@ -66,4 +56,11 @@ export class NowplayingComponent implements OnInit {
     localStorage.setItem(timeDisplayModeKey, this.timeDisplayMode);
   }
 
+  getTotalQueueLengthMilliseconds() : number {
+    if (this.queueService.queueLengthMilliseconds == NaN) return 0;
+
+    let progress = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.progress_seconds : 0;
+    let duration = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.track_length_seconds : 0;
+    return (duration - progress)*1000 + this.queueService.queueLengthMilliseconds;
+  }
 }

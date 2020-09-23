@@ -1,7 +1,7 @@
 <div class="something-went-wrong alert-danger text-center py-3 fixed-bottom" *ngIf="httpService.requestInFlight == false">
   <div class="row">
     <div class="col-12">
-      Something went wrong! Trying again in {{timeToRetry | date: 'm:ss'}}.
+      Something went wrong! Trying again in {{timeToRetry | tracklength }}.
     </div>
   </div>
 </div>

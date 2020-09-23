@@ -10,15 +10,18 @@ export class TrackLengthPipe implements PipeTransform {
 
     millisecondsToMS(d) : string {
         d = Number(d / 1000);
+        var absd = Math.abs(d);
 
-        var h = Math.floor(d / 3600);
-        var m = Math.floor(d % 3600 / 60);
-        var s = Math.floor(d % 3600 % 60);
+        var h = Math.floor(absd / 3600);
+        var m = Math.floor(absd % 3600 / 60);
+        var s = Math.floor(absd % 3600 % 60);
+
+        var n = (d < 0? "-": "");
 
         if (h > 0) {
-            return h + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+            return n + h + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
         } else {
-            return ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+            return n + ('' + m).slice(-2) + ":" + ('0' + s).slice(-2);
         }
     }
 }

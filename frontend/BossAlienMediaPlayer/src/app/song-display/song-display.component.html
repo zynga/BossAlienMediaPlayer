@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 vert-center additional-info"><span class="track-length"><i class="far fa-clock"></i> {{Track.length | date: 'm:ss'}} </span><span *ngIf="Track.requestedBy"> – Requested by <span placement="top" [ngbTooltip]="Track.requestedBy.user_id">[{{Track.requestedBy.alias}}]</span></span></div>
+      <div class="col-md-12 vert-center additional-info"><span class="track-length"><i class="far fa-clock"></i> {{ Track.length | tracklength }} </span><span *ngIf="Track.requestedBy"> – Requested by <span placement="top" [ngbTooltip]="Track.requestedBy.user_id">[{{Track.requestedBy.alias}}]</span></span></div>
     </div>
   </div>
 </div>
