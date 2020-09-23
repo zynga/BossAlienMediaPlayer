@@ -107,8 +107,4 @@ export class SearchComponent implements OnInit {
       this.currentSearchType = this.searchTypes[0];
     }
   }
-
-  getQueueLengthMilliseconds() : number {
-    return this.queueService.queueLengthMilliseconds;
-  }
 }
