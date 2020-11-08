@@ -25,7 +25,7 @@ export class NowplayingComponent implements OnInit {
 
   getProgressTime() : number {
     let secs = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.progress_seconds : 0;
-    return secs; 
+    return secs*1000; 
   }
 
   getTotalTime() : number {
