@@ -66,7 +66,6 @@ RUN set -ex \
  && chmod go+rwX -R $HOME /entrypoint.sh
 
 RUN mkdir -p /var/lib/mopidy/media
-RUN mkdir 
 
 # Runs as mopidy user by default.
 RUN adduser mopidy sudo
