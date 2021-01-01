@@ -47,7 +47,7 @@ class LoginRequestHandler(BaseRequestHandler):
                 ldap_connection.set_option(ldap.OPT_X_TLS_NEWCTX,0)
 
                 # Now try StartTLS extended operation
-                l.start_tls_s()
+                ldap_connection.start_tls_s()
 
             ldap_connection.simple_bind_s(who=ldap_dn, cred=password)
             user_id = ldap_connection.whoami_s().replace('u:CORP\\', '')
