@@ -66,6 +66,8 @@ do
 	inject_value "$LINE" "$DIR/docker/icecast/icecast.xml"
 done < $DIR/docker/mopidy.conf.secrets
 
+inject_value "USE_LDAP_STARTTLS true" "$DIR/docker/mopidy.conf"
+inject_value "LDAP_CERTIFICATE_PATH /config/ldapcert" "$DIR/docker/mopidy.conf"
 inject_value "XHEADERS_ENABLED true" $DIR/docker/mopidy.conf
 inject_value "ICECAST_URL https://$SERVER_NAME/icecast" $DIR/docker/mopidy.conf
 

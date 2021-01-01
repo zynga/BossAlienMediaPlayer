@@ -88,6 +88,8 @@ class BAMPExtension(ext.Extension):
         schema['slack_web_hook'] = config.String(optional=False)
         schema['build_hash'] = config.String(optional=False)
         schema['icecast_url'] = config.String(optional=True)
+        schema['use_ldap_starttls'] = config.Boolean(optional=Fals)
+        schema['ldap_certificate_path'] = config.String(optional=False)
 
         return schema
 

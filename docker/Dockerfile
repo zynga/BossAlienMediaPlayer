@@ -51,8 +51,8 @@ RUN set -ex \
 # Start helper script.
 COPY entrypoint.sh /entrypoint.sh
 
-# Default configuration.
-COPY mopidy.conf /config/mopidy.conf
+# Mopidy configuration (and LDAP certificate if exists)
+COPY mopidy.conf ldapcert* /config/
 
 # Copy the pulse-client configuratrion.
 COPY pulse-client.conf /etc/pulse/client.conf
@@ -66,6 +66,7 @@ RUN set -ex \
  && chmod go+rwX -R $HOME /entrypoint.sh
 
 RUN mkdir -p /var/lib/mopidy/media
+RUN mkdir 
 
 # Runs as mopidy user by default.
 RUN adduser mopidy sudo
