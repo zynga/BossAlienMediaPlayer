@@ -14,7 +14,7 @@ logger = logging.getLogger(__package__)
 
 # All search options we support. Default is the first entry.
 class SearchOptions:
-    all_search_options = ['any', 'track_name', 'album', 'artist']
+    all_search_options = ['any', 'track_name', 'album', 'artist', 'uri']
 
 
 # Request handler for searching mopidy's backend and returning a list of TrackDTOs based on the search terms.

@@ -8,7 +8,8 @@
                         <a class="dropdown-item" [routerLink]="" (click)="trash()"><i class="fas fa-trash"></i> Remove track</a>
                         <div class="dropdown-divider"></div>
                     </div>
-                    <a class="dropdown-item" [routerLink]="" (click)="spotifyService.openTrack(Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify</a>
+                    <a class="dropdown-item" [routerLink]="" (click)="spotifyService.openTrack(Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify Web</a>
+                    <a class="dropdown-item" [routerLink]="" (click)="spotifyService.reroute(Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify App</a>
                 </div>
             </div>
         </div>

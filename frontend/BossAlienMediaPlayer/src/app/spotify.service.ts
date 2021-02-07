@@ -11,4 +11,8 @@ export class SpotifyService {
     let trackId = trackUri.split(":")[2];
     window.open("http://open.spotify.com/track/" + trackId, "_blank");
   }
+  
+  reroute(url: string) : void {
+    window.location.href = url;
+  }
 }

@@ -24,14 +24,16 @@ export class SearchComponent implements OnInit {
     "any",
     "track_name",
     "album",
-    "artist"
+    "artist",
+    "uri",
   ];
 
   public typeMap = {
     "any": "Any",
     "track_name": "Track",
     "album": "Album",
-    "artist": "Artist"
+    "artist": "Artist",
+    "uri": "URI",
   }
 
   searching: boolean = false;
