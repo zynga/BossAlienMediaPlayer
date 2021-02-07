@@ -2,7 +2,7 @@
 
 .search-field-container {
     top: $navbar-height + $now-playing-height;
-    
+    z-index: 999;
 }
 
 .search-bg{    
