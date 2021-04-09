@@ -1,0 +1,16 @@
+<div *ngIf="isStreaming">
+    <audio #IcecastStreamAudio autoplay>
+        <source [src]="streamSource">
+    </audio>
+    <div id="VolumeSlider" class="row">
+        <div class="col text-right">
+            <i class="fa fa-volume-down" (click)="onMute()"></i>
+        </div>
+        <div class="col-8 px-0 volume-input">
+            <input type="range" #VolumeInput [(ngModel)]="currentVolume" (input)="onVolumeChanged()" min="0" max="1" step="0.01">
+        </div>
+        <div class="col">
+            <i class="fa fa-volume-up" (click)="onMaxVolume()"></i>
+        </div>
+    </div>
+</div>

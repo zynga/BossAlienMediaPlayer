@@ -30,6 +30,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TrackLengthPipe } from "./tracklength.pipe";
 import { SomethingWentWrongComponent } from './something-went-wrong/something-went-wrong.component';
 import { DisconnectedFromServerGuard } from './disconnected-from-server.guard';
+import { IcecastStreamComponent } from './icecast-stream/icecast-stream.component';
 
 @Pipe({
   name: 'truncate'
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     ProfileEditorComponent,
     TruncatePipe,
     TrackLengthPipe,
-    SomethingWentWrongComponent
+    SomethingWentWrongComponent,
+    IcecastStreamComponent
   ],
   imports: [
     BrowserModule,
