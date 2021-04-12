@@ -7,5 +7,5 @@ export const environment = {
   searchDebounceTime: 600,
   maxRequestRetryDelayTime: 15000,
   icecastListenersPollTime : 60000,
-  includeAudioStream: false,
+  includeAudioStream: true,
 };
