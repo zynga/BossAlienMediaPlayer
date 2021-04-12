@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Subscription, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ConfigService } from '../config.service';
 
 const volumeKey: string = "streamVolume";
 
@@ -11,23 +13,24 @@ const volumeKey: string = "streamVolume";
 
 export class IcecastStreamComponent implements OnInit {
 
-  constructor() { }
+  constructor(private config: ConfigService) { }
 
   @ViewChild("IcecastStreamAudio") audioElement: ElementRef;
 
+  public showStreamControls: boolean;
   public streamSource: string;
   public isStreaming: boolean;
+  public isLoadingStream: boolean;
   public currentVolume: number;
 
+  private streamSourceSubscription: Subscription;
+
   ngOnInit(): void {
-    this.isStreaming = environment.includeAudioStream;
-    if (this.isStreaming == false)
+    this.showStreamControls = environment.includeAudioStream;
+    if (this.showStreamControls == false)
     {
       return;
     }
-    this.streamSource = "http://" + window.location.hostname + ":8000/bamp"
-
-    console.info("Streaming audio from " + this.streamSource);
 
     var savedVolumeString = localStorage.getItem(volumeKey);
     if (savedVolumeString)
@@ -39,6 +42,37 @@ export class IcecastStreamComponent implements OnInit {
       this.currentVolume = 1.0;
       localStorage.setItem(volumeKey, "" + this.currentVolume);
     }
+  }
+
+  connectToStream(): void {
+    if (this.streamSource)
+    {
+      return;
+    }
+    var icecast_url = this.config.getValue("icecast_url");
+    if (icecast_url == undefined)
+    {
+      return;
+    }
+    
+    this.streamSource =  icecast_url + "/bamp";
+
+    if (this.streamSource == undefined)
+    {
+      return;
+    }
+
+    console.info("Streaming audio from " + this.streamSource);
+
+    this.audioElement.nativeElement.src = this.streamSource;
+    this.isLoadingStream = true;
+
+    this.audioElement.nativeElement.addEventListener("loadedmetadata", (event) => {
+      this.isLoadingStream = false;
+      this.isStreaming = true;
+      this.audioElement.nativeElement.volume = this.currentVolume;
+      this.audioElement.nativeElement.play();
+    });
   }
 
   onVolumeChanged(): void {

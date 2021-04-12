@@ -1,8 +1,6 @@
-<div *ngIf="isStreaming">
-    <audio #IcecastStreamAudio autoplay>
-        <source [src]="streamSource">
-    </audio>
-    <div id="VolumeSlider" class="row">
+<div *ngIf="showStreamControls">
+    <audio #IcecastStreamAudio></audio>
+    <div id="StreamControls" class="row" *ngIf="isStreaming">
         <div class="col text-right">
             <i class="fa fa-volume-down" (click)="onMute()"></i>
         </div>
@@ -11,6 +9,12 @@
         </div>
         <div class="col">
             <i class="fa fa-volume-up" (click)="onMaxVolume()"></i>
+        </div>
+    </div>
+    <div id="StreamControls" class="row" *ngIf="!isStreaming">
+        <div class="col text-center">
+            <div *ngIf="isLoadingStream" class="spinner-border"></div>
+            <button *ngIf="!isLoadingStream" class="btn btn-sm btn-outline-secondary" (click)="connectToStream()">Join Stream</button>
         </div>
     </div>
 </div>
