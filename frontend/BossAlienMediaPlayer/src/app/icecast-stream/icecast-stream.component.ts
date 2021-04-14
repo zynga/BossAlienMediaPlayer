@@ -55,7 +55,7 @@ export class IcecastStreamComponent implements OnInit {
       return;
     }
     
-    this.streamSource =  icecast_url + "/bamp";
+    this.streamSource =  icecast_url + "/bamp?no_cache=" + Date.now();
 
     if (this.streamSource == undefined)
     {
