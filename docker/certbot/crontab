@@ -1,1 +1,0 @@
-1 6,18 * * * sleep $(expr $RANDOM % 55)m; /./certbot-auto renew --quiet --no-self-upgrade

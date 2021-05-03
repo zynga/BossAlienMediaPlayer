@@ -26,16 +26,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    logging:
-      driver: none
-
-  certbot:
-    image: certbot-renew
-    build: ./certbot
-    container_name: certbot
-    volumes:
-      - ../letsencrypt/etc/:/etc/letsencrypt/
-      - ../letsencrypt/varlib/:/var/lib/letsencrypt
 
   icecast:
     build: ./icecast
