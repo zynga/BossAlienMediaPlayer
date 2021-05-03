@@ -55,6 +55,9 @@ Things you should back up in case everything goes down, from the project directo
 We use SSL certificates from Let's Encrypt, using certbot to automate domain ownership proof. Certificates and
 all related to certbot is kept in /letsencrypt/etc and /letsencrypt/varlib.
 
+Run `certbot_renew.sh` with BAMP's domain as sole parameter to renew the certificate and reload nginx 
+configuration to pick up the new certificates.
+
 ## LDAP TLS Certificate
 
 If your LDAP/AD server requires TLS to bind, you need to set `use_ldap_starttls` in mopidy.conf. You need to set an in-container path for the certificate in `ldap_certificate_path`. This setup assumes it will be in `/config/ldapcert`, and it will be copied from `docker/ldapcert`, the same directory as `docker/mopidy.conf.secrets`.
