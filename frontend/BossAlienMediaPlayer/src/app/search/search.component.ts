@@ -52,6 +52,10 @@ export class SearchComponent implements OnInit {
   search(): void {
     if (this.currentSearchTerm)
     {
+      // Allow BAMP to search by URI automatically if it detects a Spotify URI, otherwise continue with the same search
+      if (this.currentSearchTerm.startsWith("spotify:track:")) {
+        this.currentSearchType = "uri";
+      }
       this.searchTerms.next(this.currentSearchTerm);
       this.searching = true;
     }
