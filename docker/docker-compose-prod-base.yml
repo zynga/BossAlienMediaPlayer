@@ -13,7 +13,6 @@ services:
       - "../mopidy_bamp:/var/lib/mopidy/mopidy_bamp"
       - "../database:/var/lib/mopidy/database"
       - "../media:/var/lib/mopidy/media"
-    restart: on-failure
     expose:
       - "6680"
   
