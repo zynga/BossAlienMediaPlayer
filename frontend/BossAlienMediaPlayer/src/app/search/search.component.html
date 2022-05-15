@@ -4,11 +4,9 @@
       <form>
         <div class="input-group py-3">
           <input type="search" class="form-control" placeholder="find some music" #searchBox id="search-box" name="currentSearchTerm" (input)="search()" [(ngModel)]="currentSearchTerm">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{typeMap[currentSearchType]}}</button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" *ngFor="let type of searchTypes" [routerLink]="" (click)="onSearchTypeSelected(type)">{{typeMap[type]}}</a>
-            </div>
+          <button class="btn btn-outline-secondary dropdown-toggle input-group-text" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{typeMap[currentSearchType]}}</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" *ngFor="let type of searchTypes" [routerLink]="" (click)="onSearchTypeSelected(type)">{{typeMap[type]}}</a>
           </div>
         </div>
       </form>

@@ -27,29 +27,31 @@ export class HttpService {
     this.retryDelay = retryDelay;
     let http$ = this.http.get<T>(url, {observe: "response"});
     
-    http$.subscribe(
-      res => 
-      {
-        this.versionChecker.reloadIfServerBuildHashChanged(res);
-        this.requestInFlight = false;
-        this.connected = true;
-        if (onSuccess)
+    http$.subscribe({
+      next:
+        res => 
         {
-          onSuccess(res);
-        }
-      },
-      err => 
-      {
-        this.requestInFlight = false;
-        if (err.status == 404) // This prevents the pesky error from /api/queue when not logged in
+          this.versionChecker.reloadIfServerBuildHashChanged(res);
+          this.requestInFlight = false;
+          this.connected = true;
+          if (onSuccess)
+          {
+            onSuccess(res);
+          }
+        },
+      error: err => 
         {
-          return;
+          this.requestInFlight = false;
+          if (err.status == 404) // This prevents the pesky error from /api/queue when not logged in
+          {
+            return;
+          }
+          this.connected = false;
+          timer(retryDelay).subscribe(() => {
+            this.lastRequestTime = Date.now();
+            this.attemptHttpGetRequest<T>(url, onSuccess, Math.min(retryDelay * 2, environment.maxRequestRetryDelayTime));
+          });
         }
-        this.connected = false;
-        timer(retryDelay).subscribe(() => {
-          this.lastRequestTime = Date.now();
-          this.attemptHttpGetRequest<T>(url, onSuccess, Math.min(retryDelay * 2, environment.maxRequestRetryDelayTime));
-        });
       }
     )
   }
@@ -64,25 +66,28 @@ export class HttpService {
       tap(response => this.versionChecker.reloadIfServerBuildHashChanged(response))
     );
 
-    http$.subscribe(
-      res => 
-      {
-        this.requestInFlight = false;
-        this.connected = true;
-        if (onSuccess)
+    http$.subscribe({
+      next:
+        res => 
         {
-          onSuccess(res);
+          this.requestInFlight = false;
+          this.connected = true;
+          if (onSuccess)
+          {
+            onSuccess(res);
+          }
+        },
+      error:
+        err => 
+        {
+          this.requestInFlight = false;
+          this.connected = false;
+          
+          timer(retryDelay).subscribe(() => {
+            this.lastRequestTime = Date.now();
+            this.attemptHttpPostRequest<T>(url, body, onSuccess, Math.min(retryDelay * 2, environment.maxRequestRetryDelayTime));
+          });
         }
-      },
-      err => 
-      {
-        this.requestInFlight = false;
-        this.connected = false;
-        
-        timer(retryDelay).subscribe(() => {
-          this.lastRequestTime = Date.now();
-          this.attemptHttpPostRequest<T>(url, body, onSuccess, Math.min(retryDelay * 2, environment.maxRequestRetryDelayTime));
-        });
       }
     )
   }

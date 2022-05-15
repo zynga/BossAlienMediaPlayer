@@ -7,15 +7,6 @@
         
         <img class="logo" [src]="getIcon()">
 
-        <!-- <img *ngIf="isPlayingTitle('In The Air Tonight');" class="logo" src="assets/phil.png">
-        <img *ngIf="isPlayingTitle('Pugwash');" class="logo" src="assets/pugwash.png">
-
-        <ng-template #standardTrackBlock>
-          <img class=logo src="assets/bamplogo_small.png">
-        </ng-template>
-
-        <img class=logo src="assets/bamplogo_small.png"> -->
-
         <span class="logo-1">BossAlien</span><span class="logo-2">MusicPlayer</span>
       </a>
 
@@ -23,7 +14,7 @@
 
       <span *ngIf="authService.isLoggedIn">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -39,7 +30,7 @@
                 <a class="nav-link" [routerLink]="['history']" [routerLinkActive]="['active']">History</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" [routerLink]="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" [routerLink]="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user-circle"></i> {{authService.user.alias}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">

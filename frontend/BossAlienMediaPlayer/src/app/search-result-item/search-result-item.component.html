@@ -7,7 +7,7 @@
       {{noQueueReason}}
     </div>
     <div class="col-auto vert-center pr-4">
-      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
       <div class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="" (click)="spotifyService.openTrack(SearchResult.Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify Web</a>
         <a class="dropdown-item" [routerLink]="" (click)="spotifyService.reroute(SearchResult.Track.uri)"><i class="fab fa-spotify"></i> Open in Spotify App</a>

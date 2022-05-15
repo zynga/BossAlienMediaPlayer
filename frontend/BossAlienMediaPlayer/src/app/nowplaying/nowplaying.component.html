@@ -80,7 +80,7 @@
     </div> 
 
     <div class="row total-queue-time">
-        Total Queue Time: &nbsp; <span>{{ getTotalQueueLengthMilliseconds() | tracklength }}</span>
+        Total Queue Time: &nbsp; {{ getTotalQueueLengthMilliseconds() | tracklength }}
     </div>
     
     <div class="row song-progress">
@@ -96,8 +96,8 @@
 
           <div class="row pt-1">
             <div class="col-md-12">
-                <span class="float-md-left track-time">{{ getProgressTime() | tracklength }}</span>
-                <a [routerLink]="" (click)="toggleTimeDisplayMode()"><span class="float-md-right track-time">{{ getTotalTime() | tracklength }}</span></a>
+                <span class="float-md-start track-time">{{ getProgressTime() | tracklength }}</span>
+                <a [routerLink]="" (click)="toggleTimeDisplayMode()"><span class="float-md-end track-time">{{ getTotalTime() | tracklength }}</span></a>
             </div>
           </div>
         </div>
