@@ -16,18 +16,6 @@ mopidy_bamp
 
 BossAlien Music Player
 
-
-Installation
-============
-
-Install by running::
-
-    pip install mopidy_bamp
-
-Or, if available, install the Debian/Ubuntu package from `apt.mopidy.com
-<http://apt.mopidy.com/>`_.
-
-
 Configuration
 =============
 
