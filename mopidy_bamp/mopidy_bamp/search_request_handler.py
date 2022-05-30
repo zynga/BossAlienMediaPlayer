@@ -48,7 +48,7 @@ class SearchRequestHandler(BaseRequestHandler):
         search_terms = search_text.split()
 
         # uris should include all providers we wish to search through. When the field is ommitted, we can also search for local files, which will break things
-        search_results = self.core.library.search({search_option: search_terms}, uris=['spotify:'], exact=exact_match).get()
+        search_results = self.core.library.search({search_option: search_terms}, uris=['yt:'], exact=exact_match).get()
 
         num_search_results = len(search_results)
 
