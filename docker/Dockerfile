@@ -41,7 +41,7 @@ RUN set -ex \
         requests[security] \
         python-ldap \
         https://github.com/natumbri/mopidy-youtube/archive/develop.zip \
-        youtube-dl \
+        yt-dlp \
         ytmusicapi \
  && mkdir -p /var/lib/mopidy/.config \
  && ln -s /config /var/lib/mopidy/.config/mopidy \
