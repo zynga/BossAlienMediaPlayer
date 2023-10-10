@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN set -ex \
     # Official Mopidy install for Debian/Ubuntu along with some extensions
@@ -11,7 +11,6 @@ RUN set -ex \
         gnupg \
         gstreamer1.0-alsa \
         gstreamer1.0-plugins-bad \
-        python3-crypto \
         sqlite3 \
         sudo \
         vim \
@@ -23,15 +22,24 @@ RUN set -ex \
         cron \
         net-tools \
         procps \
-        python-pykka \
- && mkdir -p /usr/local/share/keyrings \
- && curl -L -o /usr/local/share/keyrings/mopidy-archive-keyring.gpg https://apt.mopidy.com/mopidy.gpg \
- && curl -L https://apt.mopidy.com/buster.list -o /etc/apt/sources.list.d/mopidy.list \
- && apt-get update \
+        libgstreamer1.0-dev \
+        libgstreamer-plugins-base1.0-dev \
+        pkg-config \
+        git \
+ && ( curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y ) \
+ && mkdir -p /etc/apt/keyrings \
+ && curl -L -o /etc/apt/keyrings/mopidy-archive-keyring.gpg https://apt.mopidy.com/mopidy.gpg \
+ && curl -L https://apt.mopidy.com/bullseye.list -o /etc/apt/sources.list.d/mopidy.list \
+ && apt-get update \ 
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         mopidy \
         mopidy-local \
-        mopidy-spotify \
+ && git clone --depth 1 https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs \
+ && cd gst-plugins-rs \
+ && . "$HOME/.cargo/env" \
+ && cargo build --package gst-plugin-spotify --release \
+ && install -m 644 target/release/libgstspotify.so $(pkg-config --variable=pluginsdir gstreamer-1.0)/ \
+ && gst-inspect-1.0 spotify \
  && apt-get install -y python3-pip \
  && pip3 install -U six \
  && pip3 install \
@@ -40,6 +48,7 @@ RUN set -ex \
         pyopenssl \
         requests[security] \
         python-ldap \
+ && python3 -m pip install https://github.com/mopidy/mopidy-spotify/archive/master.zip \
  && mkdir -p /var/lib/mopidy/.config \
  && ln -s /config /var/lib/mopidy/.config/mopidy \
     # Clean-up

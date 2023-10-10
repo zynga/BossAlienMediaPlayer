@@ -22,6 +22,7 @@ Installation instructions follow, see INSTALL.md for troubleshooting and further
 * Install docker \
 `brew cask install docker` \
 `brew install docker-compose`
+* Install md5sum `brew install md5sha1sum`
 * Install pulseaudio `brew install pulseaudio`
 * Edit `/usr/local/Cellar/pulseaudio/12.2/etc/pulse/default.pa`, uncomment the following lines: \
 `load-module module-esound-protocol-tcp` \
