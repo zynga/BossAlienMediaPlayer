@@ -27,6 +27,9 @@ RUN set -ex \
         pkg-config \
         git \
  && ( curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y ) \
+ && curl http://ftp.us.debian.org/debian/pool/main/libs/libshout/libshout3_2.4.1-2_amd64.deb > libshout3_2.4.1-2_amd64.deb \
+ && dpkg -i libshout3_2.4.1-2_amd64.deb \
+ && DEBIAN_FRONTEND=noninteractive apt-mark hold libshout3 \
  && mkdir -p /etc/apt/keyrings \
  && curl -L -o /etc/apt/keyrings/mopidy-archive-keyring.gpg https://apt.mopidy.com/mopidy.gpg \
  && curl -L https://apt.mopidy.com/bullseye.list -o /etc/apt/sources.list.d/mopidy.list \
