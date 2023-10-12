@@ -74,7 +74,7 @@ class NowPlayingRequestHandler(BaseRequestHandler):
 
         playback_state.track_length_seconds = track.length / 1000.0
         playback_state.progress_seconds = self.core.playback.get_time_position().get() / 1000.0
-        playback_state.progress_percent = playback_state.progress_seconds / playback_state.track_length_seconds
+        playback_state.progress_percent = playback_state.progress_seconds / playback_state.track_length_seconds if playback_state.track_length_seconds != 0 else 0
 
         response['queueitem'] = queue_item
         response['user'] = user
