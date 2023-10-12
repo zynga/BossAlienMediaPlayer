@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
- @import "../node_modules/bootstrap/scss/bootstrap.scss";
- @import "../node_modules/bootstrap/scss/mixins";
- @import "../node_modules/ngx-toastr/toastr.css";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "variables.scss";
 
- @import "variables.scss";
 
  @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,800');
 
