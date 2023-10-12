@@ -57,7 +57,7 @@ export class NowplayingComponent implements OnInit {
   }
 
   getTotalQueueLengthMilliseconds() : number {
-    if (this.queueService.queueLengthMilliseconds == NaN) return 0;
+    if (Number.isNaN(this.queueService.queueLengthMilliseconds)) return 0;
 
     let progress = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.progress_seconds : 0;
     let duration = this.queueService.currentPlaybackState ? this.queueService.currentPlaybackState.track_length_seconds : 0;
