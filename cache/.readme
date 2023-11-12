@@ -1,0 +1,1 @@
+This directory is mounted in BAMP's container to allow Mopidy write the cache outside the container. This directory will grow up with time. As a cache this can be deleted if it gets too big.

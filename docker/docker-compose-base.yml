@@ -9,6 +9,7 @@ services:
       - "../mopidy_bamp:/var/lib/mopidy/mopidy_bamp"
       - "../database:/var/lib/mopidy/database"
       - "../media:/var/lib/mopidy/media"
+      - "../cache:/var/lib/mopidy/.cache"
     ports:
       - "6680:6680"
   icecast:

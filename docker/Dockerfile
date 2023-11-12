@@ -26,6 +26,7 @@ RUN set -ex \
         libgstreamer-plugins-base1.0-dev \
         pkg-config \
         git \
+        ncmpcpp \
  && ( curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y ) \
  && curl http://ftp.us.debian.org/debian/pool/main/libs/libshout/libshout3_2.4.1-2_amd64.deb > libshout3_2.4.1-2_amd64.deb \
  && dpkg -i libshout3_2.4.1-2_amd64.deb \
@@ -37,6 +38,7 @@ RUN set -ex \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         mopidy \
         mopidy-local \
+        mopidy-mpd \
  && git clone --depth 1 https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs \
  && cd gst-plugins-rs \
  && . "$HOME/.cargo/env" \

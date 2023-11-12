@@ -28,6 +28,32 @@ each line has two columns, a secret name, and a secret value, separated by a spa
 * `docker/mopidy.conf` has been gitignored too, do not check in this file.
 * Spotify client ID and secret can be obtained from https://www.mopidy.com/authenticate/#spotify
 
+## "Position query failed"
+
+Sometimes the streaming with mopidy can fail, in such case you might get an error like this:
+
+```
+bamp          	| INFO 	2023-11-06 11:20:49,979 [7:HttpServer] mopidy_bamp
+bamp          	|   Track spotify:track:1eeRBdZ22KoULKkPmLK5Kc in queue metadata but not mopidy, removing
+bamp          	| thread '<unnamed>' panicked at audio/spotify/src/spotifyaudiosrc/imp.rs:250:37:
+bamp          	| called `Result::unwrap()` on an `Err` value: RecvError
+bamp          	| note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+bamp          	| ERROR	2023-11-06 11:24:52,547 [7:MainThread] mopidy.audio.gst
+bamp          	|   GStreamer error: Panicked: called `Result::unwrap()` on an `Err` value: RecvError
+bamp          	| DEBUG	2023-11-06 11:24:52,547 [7:MainThread] mopidy.audio.gst
+bamp          	|   Got ERROR bus message: error=GLib.Error('Panicked: called `Result::unwrap()` on an `Err` value: RecvError', 'gst-library-error-quark', 1) debug=None
+bamp          	| DEBUG	2023-11-06 11:24:52,552 [7:MainThread] mopidy.audio.gst
+bamp          	|   Changing state to GST_STATE_NULL: result=GST_STATE_CHANGE_SUCCESS
+bamp          	| DEBUG	2023-11-06 11:24:53,224 [7:Audio-3] mopidy.audio.actor
+bamp          	|   Position query failed
+```
+
+And the position query failed will be spammed in logs constantly, and you will not get more sound.
+
+Due to how BAMP works, there are no API calls that could unblock this situation. For this case, we have enabled `mopidy-mpd` in localhost within the container. This allows you to run an mpd client inside the container and unblock BAMP.
+
+Open a shell inside the bamp container, and run `ncmpcpp`. Then press down and up to select the first song of the playlist, and then press `delete` to delete the first song from the playlist. This will prompt BAMP to play the next song and (maybe) continue as usual (if the problem was transient, the API might just be down at some point). Do not try to re-play the song as BAMP will read the events from the playlist changing and remove the first song from the playlist and become inconsistent with the voting queue.
+
 ## Sources
 
 * https://stackoverflow.com/questions/40136606/how-to-expose-audio-from-docker-container-to-a-mac 
