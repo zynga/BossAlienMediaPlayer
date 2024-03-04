@@ -55,7 +55,7 @@ RUN set -ex \
         pyopenssl \
         requests[security] \
         python-ldap \
- && python3 -m pip install https://github.com/mopidy/mopidy-spotify/archive/master.zip \
+ && python3 -m pip install Mopidy-Spotify==5.0.0a1 \
  && mkdir -p /var/lib/mopidy/.config \
  && ln -s /config /var/lib/mopidy/.config/mopidy \
     # Clean-up
