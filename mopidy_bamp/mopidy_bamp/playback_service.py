@@ -27,7 +27,10 @@ class PlaybackService(BaseService):
 
     # Enable playback, and start playing
     def enable_playback(self):
-        self.lock.acquire()
+        acquired = self.acquire_lock()
+        if not acquired:
+            logger.debug('Lock not acquired')
+            return
 
         try:
             if not self.__playback_enabled:
@@ -35,32 +38,44 @@ class PlaybackService(BaseService):
                 self.core.tracklist.set_consume(True)
                 self.core.playback.play()
         finally:
-            self.lock.release()
+            self.release_lock()
 
     # Disable playback, and pause anything currently playing
     def disable_playback(self):
-        self.lock.acquire()
+        acquired = self.acquire_lock()
+        if not acquired:
+            logger.debug('Lock not acquired')
+            return
 
         try:
             if self.__playback_enabled:
                 self.__playback_enabled = False
                 self.core.playback.pause()
         finally:
-            self.lock.release()
+            self.release_lock()
 
     # Check to see if playback is enabled or not
     def get_playback_enabled(self):
-        self.lock.acquire()
+        acquired = self.acquire_lock()
+        if not acquired:
+            logger.debug('Lock not acquired')
+            return
 
         try:
             return self.__playback_enabled
         finally:
-            self.lock.release()
+            self.release_lock()
 
     # Start playing, if playback is enabled, does nothing if it is not enabled
     def start_playing_if_possible(self):
+        if not self.initialised:
+            return
+        
         try:
-            self.lock.acquire()
+            acquired = self.acquire_lock()
+            if not acquired:
+                logger.debug('Lock not acquired')
+                return
         except:
             logger.debug('Lock not created yet')
             return
@@ -76,7 +91,7 @@ class PlaybackService(BaseService):
                     self.core.playback.play()
 
         finally:
-            self.lock.release()
+            self.release_lock()
 
 
 g_playback = PlaybackService()

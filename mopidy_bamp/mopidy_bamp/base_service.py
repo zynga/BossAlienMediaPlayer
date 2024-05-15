@@ -20,3 +20,10 @@ class BaseService:
     def check_init(self):
         if not self.initialised:
             raise tornado.web.HTTPError(500)
+        
+    def acquire_lock(self):
+        acquired = self.lock.acquire(timeout=2)
+        return acquired
+    
+    def release_lock(self):
+        self.release_lock()

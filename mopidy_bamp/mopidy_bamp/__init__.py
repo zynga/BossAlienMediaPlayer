@@ -102,6 +102,7 @@ class BAMPExtension(ext.Extension):
     def setup(self, registry):
         from .actor import HttpFrontend
         from .event_listener_actor import EventListenerFrontend
+        from .audio_listener_actor import AudioListenerFrontend
 
         with DBConnection() as db_connection:
             db_connection.user_table.create_table()
@@ -114,6 +115,7 @@ class BAMPExtension(ext.Extension):
 
         registry.add('frontend', HttpFrontend)
         registry.add('frontend', EventListenerFrontend)
+        registry.add('frontend', AudioListenerFrontend)
         registry.add('http:app', {
             'name': self.ext_name,
             'factory': bamp_factory,
