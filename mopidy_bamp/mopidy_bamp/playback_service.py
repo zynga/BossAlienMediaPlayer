@@ -59,7 +59,7 @@ class PlaybackService(BaseService):
         acquired = self.acquire_lock()
         if not acquired:
             logger.debug('Lock not acquired')
-            return
+            return True
 
         try:
             return self.__playback_enabled

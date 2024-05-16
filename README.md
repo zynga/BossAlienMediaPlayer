@@ -73,3 +73,5 @@ If your LDAP/AD server requires TLS to bind, you need to set `use_ldap_starttls`
 * Kev Adsett
 * Ralph Tittensor
 * Robert Lancaster
+
+With special thanks to Felipe Andrade for care and maintenance

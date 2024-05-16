@@ -26,4 +26,4 @@ class BaseService:
         return acquired
     
     def release_lock(self):
-        self.release_lock()
+        self.lock.release()
