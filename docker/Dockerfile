@@ -56,7 +56,7 @@ RUN set -ex \
         pyopenssl \
         requests[security] \
         python-ldap \
- && python3 -m pip install --break-system-packages Mopidy-Spotify==5.0.0a3 \
+ && python3 -m pip install Mopidy-Spotify==5.0.0a3 \
  && mkdir -p /var/lib/mopidy/.config \
  && ln -s /config /var/lib/mopidy/.config/mopidy \
     # Clean-up
