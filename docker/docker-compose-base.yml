@@ -1,4 +1,3 @@
-version: '3'
 services:
   bamp:
     build: .
@@ -19,3 +18,4 @@ services:
       - ./icecast/icecast.xml:/etc/icecast2/icecast.xml
     ports:
       - 8000:8000
+      

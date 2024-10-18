@@ -27,6 +27,7 @@ RUN set -ex \
         pkg-config \
         git \
         ncmpcpp \
+        iproute2 \
  && ( curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y ) \
  && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) \
  && echo Arch is ${arch} \

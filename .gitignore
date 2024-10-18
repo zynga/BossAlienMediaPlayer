@@ -9,3 +9,4 @@ docker/icecast/icecast.xml
 docker/icecast/logs/*.log
 .idea
 frontend/BossAlienMediaPlayer/.angular/cache
+cache/*

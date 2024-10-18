@@ -76,6 +76,6 @@ echo Build hash is $BUILD_HASH
 inject_value "BUILD_HASH $BUILD_HASH" $DIR/docker/mopidy.conf
 
 (cd $DIR/docker && \
-	docker-compose -f $DIR/docker/docker-compose.yml up --build && \
+	OTEL_METRICS_EXPORTER=none docker-compose -f $DIR/docker/docker-compose.yml up --build && \
 	cd -)
 
