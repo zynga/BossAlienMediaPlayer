@@ -42,7 +42,7 @@ RUN set -ex \
         mopidy \
         mopidy-local \
         mopidy-mpd \
- && git clone -b spotify-access-token-logging --depth 1 https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs \
+ && git clone -b spotify-access-token-logging --depth 1 https://gitlab.freedesktop.org/kingosticks/gst-plugins-rs \
  && cd gst-plugins-rs \
  && . "$HOME/.cargo/env" \
  && cargo build --package gst-plugin-spotify --release \
