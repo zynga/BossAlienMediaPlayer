@@ -42,7 +42,7 @@ RUN set -ex \
         mopidy \
         mopidy-local \
         mopidy-mpd \
- && git clone --depth 1 https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs \
+ && git clone -b spotify-access-token-logging --depth 1 https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs \
  && cd gst-plugins-rs \
  && . "$HOME/.cargo/env" \
  && cargo build --package gst-plugin-spotify --release \
@@ -56,7 +56,7 @@ RUN set -ex \
         pyopenssl \
         requests[security] \
         python-ldap \
- && python3 -m pip install Mopidy-Spotify==5.0.0a1 \
+ && python3 -m pip install --break-system-packages Mopidy-Spotify==5.0.0a3 \
  && mkdir -p /var/lib/mopidy/.config \
  && ln -s /config /var/lib/mopidy/.config/mopidy \
     # Clean-up
